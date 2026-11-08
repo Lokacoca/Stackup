@@ -1,0 +1,8 @@
+﻿<p>@ViewData["COT"]<span>/5</span></p>
+
+
+@if ( Convert.ToInt32(ViewData["Check1"]) == 1 &&  Convert.ToInt32(ViewData["COT"]) != 5)
+{
+    <a class="Profile124" href="@Url.Action("CreateJoin", "Home", new{TID = Convert.ToInt32(ViewData["TID"]), UID = Context.Session.GetInt32("UID")})">Join Team</a>
+
+}

@@ -1,0 +1,748 @@
+﻿
+<head>
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        }
+
+        #grid {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(20, 5vw);
+        grid-template-rows: repeat(20, 5vh);
+        }
+
+        .back {
+            grid-row: 3/21;
+            grid-column: 1/21;
+            z-index: -100000;
+            background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
+        }
+
+        .hotbar {
+        grid-row: 1/3;
+        grid-column: 1/21;
+        background-color: #16171d;
+        z-index: 1000;
+        box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
+        }
+
+        #hotbaritems {
+        grid-row: 1/3;
+        z-index: 100000;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 50vw;
+        margin-left: 3vw;
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        cursor: pointer;
+        }
+
+        #hotbaritems > * {
+        max-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        }
+
+        #hotbarlogs {
+        margin-top: 90vh;
+        margin-left: 47vw;
+        z-index: 1000001;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 50vw;
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        }
+
+        #logo {
+        opacity: 0.8;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #logo:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        }
+
+        .logotitle {
+        transition: transform 0.2s ease;
+        }
+
+        #logo:hover + .logotitle {
+        transform: translateX(0.5vw);
+        }
+
+        .aa {
+        color: rgb(47, 144, 255);
+        }
+
+        .hotbarbuttons {
+        margin-left: 1.5vw;
+        opacity: 0.7;
+        font-size: 0.8vw;
+        transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        }
+
+        .hotbarbuttons:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        color: rgb(47, 144, 255);
+        }
+
+        #Profilepic {
+        border-radius: 50%;
+        background-color: #1c1e25;
+        justify-self: center;
+        }
+
+        .topsec {
+        grid-column: 18/21;
+        grid-row: 3/6;
+        background-color: #16171d;
+        z-index: 999;
+        transform: translateY(-35vh);
+        transition: transform 0.5s ease-out;
+        pointer-events: none;
+        }
+
+        .topsec.clicked {
+        transform: translateY(0);
+        pointer-events: auto;
+        }
+
+        .topsecfirst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.1vw;
+        margin-left: 1vw;
+        margin-top: 1vh;
+        }
+
+        .topsecsecond {
+        height: 4vh;
+        width: 13vw;
+        background-color: #1c1e25;
+        color: white;
+        display: flex;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        justify-self: center;
+        margin-top: 3vh;
+        gap: 1vw;
+        }
+
+        .popdown {
+        grid-column: 18/21;
+        grid-row: 6/10;
+        background-color: #16171d;
+        z-index: 999;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 1vh;
+        border-top: solid rgb(61, 61, 61) 2px;
+        transform: translateY(-35vh);
+        transition: transform 0.5s ease-out;
+        pointer-events: none;
+        }
+
+        .popdown.clicked {
+        transform: translateY(0);
+        pointer-events: auto;
+        }
+
+        .popdownbuttons {
+        color: white;
+        width: 15vw;
+        height: 4vh;
+        border-radius: 0.5vw;
+        display: flex;
+        align-items: center;
+        text-indent: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 0.7vw;
+        opacity: 0.8;
+        transition: opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+        }
+
+        .popdownbuttons:hover {
+        color: rgb(47, 144, 255);
+        background-color: #1c1e25;
+        opacity: 1;
+        }
+
+        a {
+        text-decoration: none;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        p {
+        text-decoration: none;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        .popdownicon {
+        height: 1.5vw;
+        width: 1.5vw;
+        margin-left: 0.5vw;
+        }
+
+        .hotprof{
+        transition: transform 0.2s ease;
+        cursor: pointer;
+        }
+
+        .hotprof:hover{
+        transform: scale(1.05);
+        border: solid 2px rgb(15, 19, 22);
+        }
+
+        #searchResults {
+            grid-row:8/21;
+            grid-column: 7/15;
+            background-color: #1c1d25;
+            border-radius: 1vw;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 202;
+        }
+
+
+                #searchResults1 {
+            grid-row:8/21;
+            grid-column: 7/15;
+            background-color: #1c1d25;
+            border-radius: 1vw;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            z-index: 201;
+        }
+
+
+
+        .blank {
+            grid-row: 15/21;
+            grid-column: 7/15;
+            background-color: #1c1d25;
+          z-index: -12;
+        }
+
+        .titlee {
+            grid-column: 7/15;
+            grid-row: 3/5;
+            display: flex;
+            align-self: center;
+            justify-self: center;
+            font-size: 3vw;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color:white;
+        }
+
+        .under {
+            grid-column: 7/15;
+            grid-row: 5;
+            display: flex;
+            justify-self: center;
+            font-weight: 300;
+            color: grey;
+            opacity: 0.8;
+        }
+        .red{
+            grid-column: 7/15;
+            grid-row: 6;
+            display: flex;
+            justify-self: center;
+            font-weight: 300;
+            color: red;
+
+        }
+        .green{
+            grid-column: 7/15;
+            grid-row: 6;
+            display: flex;
+            justify-self: center;
+            font-weight: 300;
+            color: green;
+
+        }
+
+
+        .agent {
+            grid-column: 1/6;
+            grid-row: 1/21;
+            opacity: 0.4;
+            display: flex;
+            justify-self: center;
+            align-self: flex-end;
+            z-index: -10;
+            animation: moveToZero 2.5s ease-in-out;
+            margin-left: 5vw;
+            user-select: none;
+            transform: scale(0.9);
+            margin-top:20vh;
+        }
+
+        .agentn {
+            opacity: 0.4;
+            grid-column: 1/6;
+            grid-row: 1/21;
+            display: flex;
+            justify-self: center;
+            align-self: flex-end;
+            z-index: -10;
+            animation: moveToZero12 2.5s ease-in-out;
+            margin-left: 5vw;
+            margin-top: -7vh;
+            user-select: none;
+            transform: scale(0.9);
+            margin-top: 20vh;
+        }
+
+
+        .agent3 {
+            grid-column: 15/21;
+            grid-row: 1/21;
+            opacity: 0.4;
+            display: flex;
+            justify-self: center;
+            align-self: flex-end;
+            z-index: -10;
+            animation: moveToZero11 2.5s ease-in-out;
+            margin-right: 5vw;
+            user-select: none;
+            transform: scale(0.9);
+            margin-top: 20vh;
+        }
+
+        @@keyframes moveToZero {
+            0% {
+                transform: translateX(-50vw) scale(0.9);
+            }
+
+            100% {
+                transform: translateX(0) scale(0.9);
+            }
+        }
+
+        @@keyframes moveToZero11 {
+            0% {
+                opacity: 0;
+                transform: translateX(50vw) scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(0.9);
+            }
+        }
+
+        @@keyframes moveToZero12 {
+            0% {
+                opacity: 0.4;
+                transform: translateX(-50vw) scale(0.9);
+            }
+
+            100% {
+                opacity: 0.4;
+                transform: translateX(0) scale(0.9);
+            }
+        }
+
+        .sigma {
+            grid-row: 6;
+            grid-column: 7/15;
+
+        }
+
+        .play {
+            grid-row: 7;
+            grid-column: 7/15;
+            display:flex;
+            align-items: flex-end;
+            margin-left: 1.3vw;
+            z-index: -21;
+        }
+
+        .play1 {
+            grid-row: 7;
+            grid-column: 7/15;
+            display: flex;
+            align-items: flex-end;
+            margin-left: 1.3vw;
+            opacity: 0;
+            z-index: -22;
+            margin-left: 0.7vw;
+        }
+
+        #searchInput{
+            height: 5vh;
+            width: 40vw;
+            border-radius:1vw;
+            text-indent: 1vw;
+        }
+
+
+        input:hover {
+            border-color: #3a7ca5;
+            box-shadow: 0 0 15px rgba(58, 124, 165, 0.8);
+        }
+
+
+        input:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.8);
+        }
+
+
+        input:disabled {
+            background: #e0e0e0;
+            color: #666;
+            border-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        #blue1 {
+            color: cornflowerblue;
+            padding-right: 0.3vw;
+        }
+
+        .playbtn {
+            background-color: rgb(33, 99, 175);
+            text-align: center;
+            color: white;
+            height: 3vh;
+            width: 3vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+            font-size: 0.6vw;
+        }
+
+        .playbtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                background-color: rgb(47, 144, 255);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .teambtn {
+            background-color: rgb(175, 118, 33);
+            text-align: center;
+            color: white;
+            height: 3vh;
+            width: 3vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+            font-size: 0.6vw;
+        }
+
+            .teambtn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                background-color: rgb(230, 144, 15);
+                transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+
+            .btns {
+            grid-column: 12/14;
+            grid-row:7/9;
+            background-color: #1c1d25;
+            height: 9vh;
+            border-radius: 0.7vw;
+            display:flex;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            align-self: flex-end;
+            z-index: 200;
+            padding-top:0.5vh;
+            }
+
+        
+            .red{
+                grid-area: 5/8/5/14;
+                color:red;
+                text-align:center;
+                justify-self:center;
+                margin-top: 2vh;
+                font-weight:bolder;
+                font-size:1.2rem;
+            }   
+            .green{
+                grid-area: 5/8/5/14;
+                color:limegreen;
+                text-align:center;
+                justify-self:center;
+                margin-top: 2vh;
+                font-weight:bolder;
+                font-size:1.2rem;
+            }
+
+             .tag{
+            opacity: 0.6;
+            font-size: 0.9rem
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+
+@model System.Data.DataTable
+@{
+    Random rnd = new Random();
+    int right = rnd.Next(2, 5);
+    int mid = rnd.Next(9, 12);
+    int left = rnd.Next(5, 9);
+}
+
+<body>
+    <div id="grid">
+
+        <div class="hotbar">
+            <div id="hotbaritems">
+                <a href="@Url.Action("Index", "Home" )" id="logo">
+                    <img src="~/Bilder/stackuplogo.png" href="@Url.Action("Index", "Home" )" width="75" height="75" id="logo">
+                </a>
+                <div class="logotitle">Stack | <span class="aa">Up</span></div>
+
+
+                <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+                @if (Context.Session.GetString("_InloggStatus") == "yes")
+                {
+                    <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="1"></vc:check>
+
+                }
+            </div>
+       
+        </div>
+             <div id="hotbarlogs">
+                @if (Context.Session.GetString("_InloggStatus") != "yes")
+                {
+                     <a class="hotbarbuttons" href="@Url.Action("Create", "Home")">Sign Up</a> 
+                    <a href="@Url.Action("LogIn", "Home")" class="hotbarbuttons">Log in</a>
+                } else
+                {
+                    <button class="hotbarbuttons inbox">Inbox</button>
+                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="60" height="60" id="Profilepic" class="hotprof">
+
+                }
+            </div>
+        @if (Context.Session.GetString("_InloggStatus") == "yes")
+        {
+            
+        <div class="topsec">
+            <div class="topsecfirst">
+                <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
+                                    <p class="marg">@Model.Rows[0]["Username"]<span class="tag">@Model.Rows[0]["tagline"]</span></p>
+
+            </div>
+            <div class="topsecsecond">
+                <img src="~/Bilder/Elo.png" alt="" class="popdownicon">
+                <div>@Model.Rows[0]["rank"]</div>
+            </div>
+        </div>
+
+
+        <div class="popdown">
+
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("LogOut", "Home")">LogOut</a>
+
+            </div>
+
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
+                <a href="Settings">Settings</a>
+            </div>
+
+
+            @if (Convert.ToInt32(Model.Rows[0]["TID"]) == 0)
+            {
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("Search", "Home", new{ ben = 1})">Join Team</a>
+
+                    </div>
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
+
+                    </div>
+            }
+            else
+            {
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
+
+                </div>
+            }
+
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">Profile</a>
+            </div>
+
+        </div>
+        }
+
+     @*    skriv allt under///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ *@
+          
+               <h1 class="titlee">Search</h1>
+
+               <p class="under">Looking for a friend? Try searching their username.</p>
+
+        <div class="back"></div>
+        <p class="red">@ViewData["error"]</p>
+        <p class="green">@ViewData["success"]</p>
+
+
+
+            <vc:Search input="@Convert.ToString(ViewData["input"])"></vc:Search>
+        <vc:team-search input="@Convert.ToString(ViewData["input"])"></vc:team-search>
+
+        <div class="blank"></div>
+
+        <input class="Check"  type="hidden"  value="@ViewData["ben"]" />
+
+
+
+        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+            <input class="Search" name="input" type="text" id="searchInput" placeholder="Search Players" />
+        </form>
+
+        <div class="btns">
+            <button class="playbtn">Players</button>
+            <button class="teambtn">Teams</button>
+        </div>
+
+
+
+
+        
+        @if (right == 2)
+        {
+            <img src="~/Bilder/@($"{right}.png")" alt="" class="agentn">
+        }
+        else
+        {
+            <img src="~/Bilder/@($"{right}.png")" alt="" class="agent">
+        }
+
+        <img src="~/Bilder/@($"{left}.png")" alt="" class="agent3">
+
+
+    </div>
+
+    <script>
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+ 
+          const disbandBtn = document.querySelector('.inbox')
+          const board = document.querySelector('.box')
+
+        if (disbandBtn != null ){
+                    disbandBtn.addEventListener("click", function () {
+                        if(board.style.opacity == 0){
+                        board.style.opacity = "1";
+                        board.style.zIndex= "1000";
+
+                        }else{
+                        board.style.opacity = "0";
+                        board.style.zIndex= "-1";
+                        }
+
+                   });
+              }
+
+   
+
+
+           if ( document.querySelector('#Profilepic') != null){
+                      const Profilepic = document.querySelector('#Profilepic')
+                 const popdown = document.querySelector('.popdown')
+                        const topsec = document.querySelector('.topsec')
+ 
+
+    Profilepic.addEventListener("click", function () {
+
+    if (topsec.classList.contains('clicked')){
+    topsec.classList.remove('clicked');
+    popdown.classList.remove('clicked');
+    } else {
+    topsec.classList.add('clicked');
+    popdown.classList.add('clicked');
+    }
+
+    });
+           }
+
+             const search = document.querySelector('#searchResults')
+                  const team = document.querySelector('#searchResults1')
+                                       const searchInput = document.querySelector('#searchInput')
+                       const teambtn = document.querySelector('.teambtn')
+                    const playbtn = document.querySelector('.playbtn')
+             const play = document.querySelector('.play')
+              const play1 = document.querySelector('.play1');
+                     const under = document.querySelector('.under');
+                     
+
+
+
+
+                                 teambtn.addEventListener("click", function () {
+                                   search.style.opacity = "0";
+                                   play.style.opacity = "0";
+                                   team.style.opacity = "1";
+                                          team.style.zIndex = "300";
+                                                 search.style.zIndex = "299";
+                                          play1.style.opacity = "1";
+                                                 under.textContent = "Looking for a Team? Try searching their Team name!"
+                                                 searchInput.placeholder = "Search for Teams"
+                                 });
+
+                                        playbtn.addEventListener("click", function () {
+                                            search.style.opacity = "1";
+                                   play.style.opacity = "1";
+                                   team.style.opacity = "0";
+                                                                                    team.style.zIndex = "299";
+                                                        search.style.zIndex = "300";
+                                          play1.style.opacity = "0";
+                                                 under.textContent = "Looking for a friend? Try searching their username!"
+                                          searchInput.placeholder = "Search for players"
+                                     });
+        });
+    </script>
+</body>

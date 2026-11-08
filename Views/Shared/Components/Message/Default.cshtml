@@ -1,0 +1,223 @@
+﻿<head>
+    <style>
+        .Message{
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #1c1d25;
+        border-radius: 0.5em;
+        padding-left: 0.2vw;
+        margin-top:2vh;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+        }
+
+        .Message1 {
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #1c1d25;
+        border-radius: 0.5em;
+        padding-left: 0.2vw;
+        margin-top: 2vh;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+        }
+
+        .Message:hover {
+        background-color: #20222b;
+        transition: background-color 0.2s ease;
+        }
+
+        .Message1:hover {
+        background-color: #20222b;
+        transition: background-color 0.2s ease;
+        }
+
+        #content {
+        color: white;
+        font-weight: 300;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7vw;
+        }
+
+        #content1 {
+        color: white;
+        font-weight: 300;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7vw;
+        }
+
+        #tag {
+        color: grey;
+        font-weight: 100;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.6vw;
+        opacity: 0.7;
+        }
+
+        #tag1 {
+        color: grey;
+        font-weight: 100;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.6vw;
+        opacity: 0.7;
+        }
+
+        .text {
+        grid-column: 2/4;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        padding-left: 0.5vw;
+        }
+
+        .text1 {
+        grid-column: 1/4;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        margin-left: -2vw;
+        padding-left: -1vw;
+        }
+
+
+
+        .pic {
+        height:3vw;
+        width:3vw;
+        grid-column: 1;
+        grid-row: 1;
+        border-radius:50%;
+        }
+
+        .pic1 {
+        height: 3vw;
+        width: 3vw;
+        grid-column: 4;
+        grid-row: 1;
+            border-radius: 50%;
+        }
+
+        .flow{
+        height:35vh;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none; 
+        }
+
+
+
+        .flow::-webkit-scrollbar {
+        display: none;
+        }
+
+        .text p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        }
+
+        .text1 p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        text-align: right;
+        }
+        .REP{
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+<div class="flow">
+    @if(Convert.ToInt32(ViewData["Check"]) == 1)
+    {
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+
+            if (Context.Session.GetInt32("TID") == Model.Rows[i]["TID"])
+            {
+                <div class="MessageTeam">
+
+                    <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
+
+                    <div class="text">
+                        <p id="content">@Model.Rows[i]["Content"] </p>
+                        <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+
+                <div class="MessageOpp">
+
+                    <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic1">
+
+                    <div class="text1">
+                        <p id="content1">@Model.Rows[i]["Content"] </p>
+                        <p id="user1">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
+
+                    </div>
+                </div>
+
+
+            }
+        }
+
+   
+
+    }
+    else
+    {
+        
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        if (Context.Session.GetInt32("UID") == Model.Rows[i]["UID"])
+        {
+            <div class="Message1">
+
+                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic1">
+
+                <div class="text1">
+                    <p id="content1">@Model.Rows[i]["Content"] </p>
+                    <p id="user1">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
+
+                </div>
+            </div>
+        } else {
+            <div class="Message">
+
+                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
+
+                <div class="text">
+                    <p id="content">@Model.Rows[i]["Content"] </p>
+                    <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
+
+                </div>
+            </div>
+        }
+
+ 
+}
+    }
+
+<p class="REP">@ViewData["REP"]</p>
+
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const flow = document.querySelector('.flow');
+      flow.scrollTop = flow.scrollHeight;
+    });
+</script>

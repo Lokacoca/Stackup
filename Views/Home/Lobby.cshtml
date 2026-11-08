@@ -1,0 +1,125 @@
+﻿<head>
+    <style>
+
+        .team1 {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+        border: solid 0.13em #4C4E52;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        z-index: 10000;
+        height: 65vh;
+        width: 25vw;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        }
+
+        .team2 {
+        margin-left: 50vw;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
+        border: solid 0.13em #4C4E52;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        z-index: 10000;
+        height: 65vh;
+        width: 25vw;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        }
+    </style>
+
+</head>
+@model System.Data.DataTable
+<div class="team1">
+
+    @for (int i = 0; i < 5; i++)
+    {
+        <div class="Create">
+            <a href="@Url.Action("Profile", "Home", new{ UID = Model.Rows[i]["UID"]})">@Model.Rows[i]["UserName"]<span>@Model.Rows[i]["Tagline"]</span></a>
+
+        </div>
+    }
+
+</div>
+
+<div class="team2">
+    @if(Convert.ToInt32(ViewData["Active"]) == 0)
+    {
+        @for (int i = 5; i < 10; i++)
+        {
+            <div class="Join">
+                <p>@Model.Rows[i]["UserName"]</p>
+                <p>@Model.Rows[i]["Tagline"]</p>
+
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="Join">
+            <p>To be Found...</p>
+        </div>
+        <div class="Join">
+            <p>To be Found...</p>
+        </div>
+        <div class="Join">
+            <p>To be Found...</p>
+        </div>
+        <div class="Join">
+            <p>To be Found...</p>
+        </div>
+        <div class="Join">
+            <p>To be Found...</p>
+        </div>
+    }
+
+
+</div>
+@if (Convert.ToInt32(ViewData["Active"]) == 0 && Convert.ToInt32(ViewData["NO"]) != 1)
+{
+    <vc:Message Lobby="1" LID="@Convert.ToInt32(ViewData["LID"])" TID="0"></vc:Message>
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        if(Context.Session.GetInt32("UID") == Convert.ToInt32(Model.Rows[i]["UID"]))
+        {
+            <div class="inputs">
+                <form class="form" method="post" class="form" action="@Url.Action("Message","Home", new{lID = Convert.ToInt32(ViewData["LID"]), Lobby = true})" enctype="multipart/form-data">
+                    <input type="text" name="Content" class="textinp">
+                    <input type="submit" value=">" class="stackup-button">
+                </form>
+
+            </div>
+        }
+    }
+
+
+  
+
+
+}
+
+@if (Convert.ToInt32(ViewData["NO"]) != 1)
+{
+    @if (Convert.ToInt32(Context.Session.GetInt32("UID")) == Convert.ToInt32(ViewData["CreateLeader"]))
+    {
+        <a href="@Url.Action("StopLobby", "Home")">Close Lobby</a>
+    }
+    @if (Convert.ToInt32(Context.Session.GetInt32("UID")) == Convert.ToInt32(ViewData["JoinLeader"]))
+    {
+        <a href="@Url.Action("LeaveLobby", "Home")">Leave Lobby</a>
+    }
+
+}

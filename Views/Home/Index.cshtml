@@ -1,0 +1,698 @@
+﻿<head> 
+    <style>
+
+
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        }
+
+
+        #grid {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(20, 5vw);
+        grid-template-rows: repeat(20, 5vh);
+
+        }
+
+        .blank{
+        grid-column:1/21;
+        grid-row:1/14;
+        background-color: black;
+        opacity:30%;
+        }
+
+
+
+        .button.Sign {
+        color: white;
+        text-align: center;
+        }
+
+        .hotbar {
+        grid-row:1/3;
+        grid-column:1/21;
+        background-color: #16171d;
+        z-index: 1000;
+        box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
+        }
+
+        #hotbaritems {
+        grid-row: 1/3;
+        z-index: 100000;
+        display: flex;
+        justify-content:flex-start;
+        align-items: center;
+        width: 50vw;
+        margin-left:3vw;
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        }
+
+        #hotbarlogs {
+        margin-top: -10vh;
+        margin-left: 47vw;
+        z-index: 1000001;
+        display: flex;
+        justify-content:flex-end;
+        align-items: center;
+        width: 50vw;
+
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        }
+
+        #video {
+        z-index:-1;
+        grid-column: 1/21;
+        grid-row: 1/16;
+        margin-top:-40vh;
+        pointer-events: none;
+        z-index:-101;
+        width:100%;
+        }
+
+        .gradient-box {
+        z-index:10;
+        grid-column:1/21;
+        grid-row:3/14;
+        width: 100%;
+        height: 100%; 
+        background: linear-gradient(to top, black, transparent);
+        pointer-events: none; 
+        }
+
+
+        .lowerblank {
+        z-index: -100;
+        grid-column: 1/21;
+        grid-row: 14/21;
+        background-color:black;
+        }
+
+        .climb {
+        color: white;
+        font-size: 3vw;
+        grid-column: 1/21;
+        grid-row: 4/7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 998;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        }
+
+        .climb2 {
+        color: white;
+        font-size: 1.5vw;
+        grid-column: 6/16;
+        grid-row: 6/9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        }
+
+        .signupbut {
+        grid-column: 1/21;
+        grid-row: 9/11;
+        background-color:rgb(47, 144, 255);
+        color:white;
+        border-radius: 1vw;
+        width:8vw;
+        height: 6vh;
+        z-index: 10001;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 800;
+        font-size: 1vw;
+        transition: transform 0.2s ease, background-color 0.2s ease, font-weight 0.2s ease;
+        }
+
+        .signupbut:hover {
+        background-color: rgb(25, 71, 124);
+        color: black;
+        font-weight: bolder;
+        transform: scale(1.05);
+        }
+
+        #logo{
+        opacity: 0.8;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #logo:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        }
+        .logotitle {
+        transition: transform 0.2s ease;
+        }
+
+        #logo:hover + .logotitle  {
+        transform: translateX(0.5vw);
+        }
+
+        .aa {
+        color: rgb(47, 144, 255);
+        }
+
+        .hotbarbuttons{
+        margin-left: 1.5vw;
+        opacity: 0.7;
+        font-size: 0.8vw;
+        transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+
+        }
+
+        .hotbarbuttons:hover{
+        opacity: 1;
+        transform: scale(1.05);
+        color: rgb(47, 144, 255);
+        }
+
+        .counters {
+        grid-row: 17;
+        grid-column: 1/21;
+        font-size: 2vw;
+        font-weight: bold;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        display: flex;
+        justify-content: space-evenly;
+
+        }
+
+        #blue{
+        color: rgb(47, 144, 255);
+        }
+
+        .match{
+        grid-row: 16;
+        grid-column: 3/7;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1vw;
+        font-weight: bold;
+        display:flex;
+        margin-left: 2.5vw;
+        align-items: center;
+        }
+
+        .match1{
+        grid-row: 16;
+        grid-column: 7/10;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1vw;
+        font-weight: bold;
+        display:flex;
+        margin-left: 2.5vw;
+        align-items: center;
+        }
+
+        .match2{
+        grid-row: 16;
+        grid-column: 12/15;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1vw;
+        font-weight: bold;
+        display:flex;
+        align-items: center;
+        }
+
+        .match3{
+        grid-row: 16;
+        grid-column: 16/19;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1vw;
+        font-weight: bold;
+        display:flex;
+        margin-left: 2.5vw;
+        align-items: center;
+        }
+
+        #Profilepic {
+        border-radius: 50%;
+        background-color: #1c1e25;
+        justify-self: center;
+        }
+
+        .popdown {
+        grid-column: 18/21;
+        grid-row: 6/11;
+        background-color: #16171d;
+        z-index: 999;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content:center;
+        gap:1vh;
+        border-top: solid rgb(61, 61, 61) 2px;
+        transform: translateY(-40vh);
+        transition: transform 0.6s ease-out;
+        }
+
+        .popdown.clicked {
+        transform: translateY(0);
+        }
+
+        .topsec {
+        grid-column: 18/21;
+        grid-row:3/6;
+        background-color: #16171d;
+        z-index: 999;
+        transform: translateY(-40vh);
+        transition: transform 0.6s ease-out;
+        }
+
+        .topsec.clicked {
+        transform: translateY(0);
+        }
+
+        .popdownbuttons {
+        color: white;
+        width: 15vw;
+        height: 4vh;
+        border-radius: 0.5vw;
+        display: flex;
+        align-items: center;
+        text-indent: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 0.7vw;
+        opacity: 0.8;
+        transition: opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+        }
+
+        .popdownbuttons:hover {
+        background-color:#1c1e25;
+        opacity: 1;
+        }
+
+        a {
+        text-decoration: none; 
+        color: white; 
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        p{
+        text-decoration: none; 
+        color: white; 
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        .popdownicon {
+        height: 1.5vw;
+        width: 1.5vw;
+        margin-left: 0.5vw;
+        }
+
+        .topsecsecond {
+        height: 4vh;
+        width: 13vw;
+        background-color:  #1c1e25;
+        color: white;
+        display: flex;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        justify-self: center;
+        margin-top: 3vh;
+        gap:1vw;
+        }
+
+        .topsecfirst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap:0.1vw;
+        margin-left: 1vw;
+        margin-top: 1.5vh;
+
+        }
+
+
+
+        .hotprof{
+        transition: transform 0.2s ease;
+        cursor: pointer;
+        }
+
+        .hotprof:hover{
+        transform: scale(1.05);
+        border: solid 2px rgb(15, 19, 22);
+
+        }
+
+        .marg {
+        margin-left: 1vw;
+        }
+
+        .searchicon {
+        grid-column: 14/16;
+        grid-row: 1/3;
+        display:flex;
+        align-self: center;
+        height: 1.5vw;
+        width: 1.5vw;
+        justify-self: center;
+        z-index: 1000001;
+        opacity: 0.6;
+        }
+
+        #searchInput {
+        height: 5vh;
+        width: 17.5vw;
+        display:flex;
+        justify-self: center;
+        align-self: center;
+        color:white;
+        background-color: #22232c;
+        border: none;
+        text-indent: 2.3vw;
+        border-radius: 1vw;
+        }
+
+        #searchInput:focus {
+        outline: none;
+        }
+
+        .Search{
+        grid-column:14/19;
+        grid-row: 1/3;
+        z-index:100000;
+        }
+        .Sigma{
+        grid-column: 14/19;
+        grid-row: 1/3;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        z-index: 100000;
+        }
+        .Results{
+        grid-area:3/7/8/13;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        z-index:31321231;
+        background-color:white;
+        }
+
+        .username {
+        background-color: black;
+        color: blue;
+        }
+        .behind{
+        background-color: red;
+        }
+
+        .Ninja{
+        all: unset;
+        font-family: 'Orbitron', sans-serif;
+        }
+        .box{
+        grid-area: 3/18/10/21;
+        z-index: 0;
+        opacity: 0;
+        margin-left: -2vw;
+
+        }
+        .inbox{
+        all: unset;
+        font-family: 'Orbitron', sans-serif;
+        cursor:pointer;
+        opacity: 0.7;
+        font-size: 0.8vw;
+        padding-right: 2vw;
+        }
+
+        .Lobby {
+        all: unset;
+        font-family: 'Orbitron', sans-serif;
+            margin-left: 1.5vw;
+            opacity: 0.7;
+            font-size: 0.8vw;
+            transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+            cursor: pointer;
+        }
+        .red{
+            color:red;
+            font-size:1rem;
+        }
+        .tag{
+            opacity: 0.6;
+            font-size: 0.9rem
+        }
+    </style>
+
+</head>
+ @model System.Data.DataTable
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<body> 
+
+
+    <div id="grid">
+
+        <div class="hotbar">
+            <div id="hotbaritems">
+
+                <img src="~/Bilder/stackuplogo.png" width="75" height="75" id="logo">
+                <div class="logotitle">Stack | <span class="aa">Up</span></div>
+                <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+              
+                @if (Context.Session.GetString("_InloggStatus") == "yes")
+                {
+                    <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="1"></vc:check>
+
+                }
+                
+                
+                    <p class="hotbarbuttons red">@ViewData["Bomba"]</p>
+                
+
+            </div>
+
+            <div id="hotbarlogs">
+                @if (Context.Session.GetString("_InloggStatus") != "yes")
+                {
+                     <a class="hotbarbuttons" href="@Url.Action("Create", "Home")">Sign Up</a> 
+                    <a href="@Url.Action("LogIn", "Home")" class="hotbarbuttons">Log in</a>
+                } else
+                {
+                    <button class="hotbarbuttons inbox">Inbox</button>
+                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="60" height="60" id="Profilepic" class="hotprof">
+
+                }
+            </div>
+        </div>
+
+        @if (Context.Session.GetString("_InloggStatus") == "yes")
+        {
+
+            <div class="box"><vc:requests></vc:requests></div>
+
+            <div class="topsec">
+                <div class="topsecfirst">
+                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
+                    <p class="marg">@Model.Rows[0]["Username"]<span class="tag">@Model.Rows[0]["tagline"]</span></p>
+                </div>
+                <div class="topsecsecond">
+                    <img src="~/Bilder/@Model.Rows[0]["rank"]" alt="" class="popdownicon">
+
+                </div>
+            </div>
+
+
+            <div class="popdown">
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("LogOut", "Home")">LogOut</a>
+
+                </div>
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("Settings", "Home")">Settings</a>
+                </div>
+                @if(Convert.ToInt32(Model.Rows[0]["TID"]) == 0)
+                {
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+                            <input class="Search" name="input" type="hidden"  value="" />
+                            <input class="Ninja" type="submit" value="Join Team"/>
+                        </form>
+
+                    </div>
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
+
+                    </div>
+                }
+
+
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Profile.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">View Profile</a>
+                </div>
+
+            </div>
+        }
+        <video autoplay loop muted playsinline preload="none" width="1920" id="video" controls disablePictureInPicture oncontextmenu="return false;">
+            <source src="~/Videos/Jean.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="gradient-box"></div>
+        <div class="blank"></div>
+        <div class="lowerblank"></div>
+
+        <div class="climb">WANT TO CLIMB TO NEW HIGHTS?</div>
+        <div class="climb2">StackUp is a online-Esportshub where gamers from Europe can unite and create new ways of improving their gameplay together!</div>
+
+        @if (Context.Session.GetString("_InloggStatus") != "yes")
+        {
+            <a class="signupbut" href="@Url.Action("Create", "Home")">Sign Up</a>
+        } else
+        {
+            <a class="signupbut" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+        }
+        @if (Context.Session.GetString("_InloggStatus") == "yes")
+        {
+
+        }
+        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+            <input class="Search" name="input" type="text" id="searchInput" placeholder="Search Players" />
+        </form>
+        <img class="searchicon" src="~/Bilder/searchicon.png">
+
+       <div class="match">Matches Hosted:</div>
+       <div class="match1">Registered Accounts:</div>
+       <div class="match2">Total Hours played:</div>
+       <div class="match3">Teams Created:</div>
+
+       <div class="counters">
+       <div class="counter" id="blue" data-target="74357">0</div>
+        <div class="counter" data-target="50000">0</div>
+        <div class="counter" id="blue" data-target="30000">0</div>
+        <div class="counter" data-target="10000">0</div>
+    </div>
+
+    
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+          const disbandBtn = document.querySelector('.inbox')
+          const board = document.querySelector('.box')
+
+        if (disbandBtn != null ){
+                    disbandBtn.addEventListener("click", function () {
+                        if(board.style.opacity == 0){
+                        board.style.opacity = "1";
+                        board.style.zIndex= "1000";
+
+                        }else{
+                        board.style.opacity = "0";
+                        board.style.zIndex= "-1";
+                        }
+
+                   });
+              }
+
+
+
+
+        const video = document.getElementById("video");
+        video.addEventListener("ended", function () {
+            video.currentTime = 0;
+            video.play();
+        });
+
+                document.querySelector("video").addEventListener("enterpictureinpicture", (event) => {
+            event.preventDefault();
+        });
+
+
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            let end = target;
+            let increment = Math.ceil(end / (duration / 10));
+            let current = start;
+
+            let timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = current.toLocaleString();
+            }, 10);
+        }
+
+        document.querySelectorAll(".counter").forEach(counter => {
+            let target = parseInt(counter.getAttribute("data-target"), 10);
+            animateCounter(counter, target, 1000); 
+        });
+
+        animateCounter(74357, 1000);
+
+        const Profilepic = document.querySelector('#Profilepic')
+        const popdown = document.querySelector('.popdown')
+        const topsec = document.querySelector('.topsec')
+
+        Profilepic.addEventListener("click", function () {
+
+            if (topsec.classList.contains('clicked')){
+                topsec.classList.remove('clicked'); 
+                popdown.classList.remove('clicked');
+            } else {
+                topsec.classList.add('clicked'); 
+                popdown.classList.add('clicked');
+            }
+
+        });
+
+       
+    </script>
+</body>

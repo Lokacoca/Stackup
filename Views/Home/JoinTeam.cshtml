@@ -1,0 +1,19 @@
+﻿<head>
+    <style>
+
+    </style>
+</head>
+ @model System.Data.DataTable
+
+<a href="@Url.Action("CreateTeam", "Home", new{ UID = Context.Session.GetInt32("UID")})">CREATE</a>
+
+
+<form class="Sigma" method="post" action="@Url.Action("Search","Home", new{ben = 1})">
+    <input class="Search" name="input" type="text" id="searchInput" placeholder="Search Players" />
+</form>
+<img class="searchicon" src="~/Bilder/searchicon.png">
+
+<p class="red">@ViewData["error"]</p>
+<p class="green">@ViewData["success"]</p>
+
+<vc:team-search input="@Convert.ToString(ViewData["input"])"></vc:team-search>

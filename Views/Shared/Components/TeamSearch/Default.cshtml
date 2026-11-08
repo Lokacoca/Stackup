@@ -1,0 +1,145 @@
+﻿<head>
+    <style>
+
+        .behind1{
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #16171d;
+        border-radius: 0.5em;
+        padding-left: 0.2vw;
+        margin-left: 2.5%;
+        margin-top: 2vh;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+        height: 8vh;
+        width: 95%;
+        }
+
+        .behind1:hover{
+        background-color: #242530;
+        transition: background-color 0.2s ease;
+        }
+
+        .Profile123 {
+        background-color: rgb(33, 99, 175);
+        text-align: center;
+        color: white;
+        height: 3vh;
+        width: 5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        font-size: 0.6vw;
+        transform: translateX(-0.5vw);
+        }
+
+        .Profile123:hover {
+        transform: translateY(-3px) translateX(-0.5vw);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: rgb(47, 144, 255);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .content1 {
+        grid-column: 1/4;
+        grid-row: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 0.5vw;
+        }
+
+        .flow1 {
+        height: 60vh;
+        overflow-y: scroll;
+            scrollbar-color: #242530 #1c1d25;
+            scrollbar-width: thin;
+        }
+
+
+
+
+
+        .rightcont1 {
+        grid-column: 4;
+        grid-row: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+
+        #tag12 {
+        color: grey;
+        font-weight: 100;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7vw;
+        opacity: 0.7;
+        }
+
+        #blue12{
+        color: cornflowerblue;
+        
+
+        }
+
+        .Profile124 {
+            background-color: green;
+            text-align: center;
+            color: white;
+            height: 3vh;
+            width: 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+            font-size: 0.6vw;
+            transform: translateX(-0.5vw);
+        }
+
+            .Profile124:hover {
+                transform: translateY(-3px) translateX(-0.5vw);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                background-color: lime;
+                transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+
+
+
+    </style>
+</head>
+<div class="Results1" id="searchResults1">
+
+    <div class="flow1">
+
+@model System.Data.DataTable
+
+
+        @if (Convert.ToString(ViewData["boom"]) != "yes")
+        {
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+                <div class="behind1">
+                    <div class="content1">
+                        <p>Team: <span id="blue12">@Model.Rows[i]["Name"]</span></p>
+
+                        <p>Leader: <span id="blue12">@Model.Rows[i]["UserName"]</span></p>
+
+                        <vc:team-count tid="@Convert.ToInt32(Model.Rows[i]["TID"])"></vc:team-count>
+
+                    <a class="Profile123" href="@Url.Action("ViewTeam", "Home", new{TID = Model.Rows[i]["TID"]})">View Team</a>
+                        </div>
+                </div>
+            }
+        }
+</div>
+
+                </div>
+
+
+<p class="play1"><span id="blue12">@ViewData["Count"]</span>Teams found</p>

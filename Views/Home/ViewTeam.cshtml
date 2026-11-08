@@ -1,0 +1,2029 @@
+﻿
+<head>
+    <style>
+
+
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        }
+
+
+        #grid {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(20, 5vw);
+        grid-template-rows: repeat(20, 5vh);
+        }
+
+        .blank {
+        grid-column: 1/21;
+        grid-row: 1/14;
+        background-color: black;
+        opacity: 30%;
+        }
+
+
+
+        .button.Sign {
+        color: white;
+        text-align: center;
+        }
+
+        .hotbar {
+        grid-row: 1/3;
+        grid-column: 1/21;
+        background-color: #16171d;
+        z-index: 1000;
+        box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
+        }
+
+        #hotbaritems {
+        grid-row: 1/3;
+        z-index: 100000;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 50vw;
+        margin-left: 3vw;
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        cursor: pointer;
+        }
+
+        #hotbaritems > * {
+        max-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        }
+
+        #hotbarlogs {
+        margin-top: -10vh;
+        margin-left: 47vw;
+        z-index: 1000001;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 50vw;
+        height: 10vh;
+        font-size: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        color: white;
+        }
+
+        #Profilepic1 {
+        cursor: pointer;
+        }
+
+        #video {
+        z-index: -1;
+        grid-column: 1/21;
+        grid-row: 1/16;
+        margin-top: -50vh;
+        pointer-events: none;
+        }
+
+        .gradient-box {
+        z-index: 10;
+        grid-column: 1/21;
+        grid-row: 3/14;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, black, transparent);
+        pointer-events: none;
+        }
+
+
+        .lowerblank {
+        z-index: -100;
+        grid-column: 1/21;
+        grid-row: 14/21;
+        background-color: black;
+        }
+
+        .climb {
+        color: white;
+        font-size: 3vw;
+        grid-column: 1/21;
+        grid-row: 4/7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 998;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bolder;
+        }
+
+        .climb2 {
+        color: white;
+        font-size: 1.5vw;
+        grid-column: 6/16;
+        grid-row: 6/9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        }
+
+        .signupbut {
+        grid-column: 1/21;
+        grid-row: 9/11;
+        background-color: rgb(47, 144, 255);
+        color: white;
+        border-radius: 1vw;
+        width: 8vw;
+        height: 6vh;
+        z-index: 10001;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 800;
+        font-size: 1vw;
+        transition: transform 0.2s ease, background-color 0.2s ease, font-weight 0.2s ease;
+        }
+
+        .signupbut:hover {
+        background-color: rgb(25, 71, 124);
+        color: black;
+        font-weight: bolder;
+        transform: scale(1.05);
+        }
+
+        #logo {
+        opacity: 0.8;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #logo:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        }
+
+        .logotitle {
+        transition: transform 0.2s ease;
+        }
+
+        #logo:hover + .logotitle {
+        transform: translateX(0.5vw);
+        }
+
+        .aa {
+        color: rgb(47, 144, 255);
+        }
+
+        .hotbarbuttons {
+        margin-left: 1.5vw;
+        opacity: 0.7;
+        font-size: 0.8vw;
+        transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        }
+
+        .hotbarbuttons:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        color: rgb(47, 144, 255);
+        }
+
+        .counters {
+        grid-row: 17;
+        grid-column: 1/21;
+        font-size: 2vw;
+        font-weight: bold;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        display: flex;
+        justify-content: space-evenly;
+        }
+
+        #blue {
+        color: rgb(47, 144, 255);
+        }
+
+
+        #Profilepic {
+        border-radius: 50%;
+        background-color: #1c1e25;
+        justify-self: center;
+        cursor: pointer;
+        }
+
+        .popdown {
+        grid-column: 18/21;
+        grid-row: 6/10;
+        background-color: #16171d;
+        z-index: 999;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 1vh;
+        border-top: solid rgb(61, 61, 61) 2px;
+        transform: translateY(-35vh);
+        transition: transform 0.5s ease-out;
+        }
+
+        .popdown.clicked {
+        transform: translateY(0);
+        }
+
+        .topsec {
+        grid-column: 18/21;
+        grid-row: 3/6;
+        background-color: #16171d;
+        z-index: 999;
+        transform: translateY(-35vh);
+        transition: transform 0.5s ease-out;
+        }
+
+        .topsec.clicked {
+        transform: translateY(0);
+        }
+
+        .popdownbuttons {
+        color: white;
+        width: 15vw;
+        height: 4vh;
+        border-radius: 0.5vw;
+        display: flex;
+        align-items: center;
+        text-indent: 1vw;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 0.7vw;
+        opacity: 0.8;
+        transition: opacity 0.2s ease, color 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+        }
+
+        .popdownbuttons:hover {
+        color: rgb(47, 144, 255);
+        background-color: #1c1e25;
+        opacity: 1;
+        }
+
+        a {
+        text-decoration: none;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        p {
+        text-decoration: none;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        }
+
+        .popdownicon {
+        height: 1.5vw;
+        width: 1.5vw;
+        margin-left: 0.5vw;
+        }
+
+        .topsecsecond {
+        height: 4vh;
+        width: 13vw;
+        background-color: #1c1e25;
+        color: white;
+        display: flex;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        justify-self: center;
+        margin-top: 3vh;
+        gap: 1vw;
+        }
+
+        .topsecfirst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.1vw;
+        margin-left: 1vw;
+        margin-top: 1vh;
+        }
+
+
+        .back {
+        grid-row: 1/21;
+        grid-column: 1/21;
+        z-index: -100000;
+        background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
+        }
+
+        .banner {
+        grid-row: 5/21;
+        grid-column: 3/19;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        margin-bottom: 3vh;
+        user-select: none;
+        }
+
+        #centerbanner {
+        height: 70vh;
+        width: 14vw;
+        }
+
+        #outerbanner {
+        height: 68vh;
+        width: 14vw;
+        }
+
+        #farbanner {
+        height: 65vh;
+        width: 14vw;
+        }
+
+        .tit {
+        grid-row: 4;
+        grid-column: 1/21;
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        align-self: center;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        font-size: 2vw;
+        background-color: #16171d;
+        height: 7vh;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        }
+
+        .user1 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 12.6vw;
+        margin-top: 76vh;
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #20222b;
+        height: 3.5vh;
+        width: 12vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .ownpic1 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 15.7vw;
+        margin-top: 43.8vh;
+        height: 6vw;
+        width: 6vw;
+        border-radius: 50%;
+        }
+
+        .plus4 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 17.6vw;
+        margin-top: 42.4vh;
+        font-size: 5vw;
+        font-weight: 100;
+        color: #20222b;
+        cursor: pointer;
+        user-select: none;
+        }
+
+        .rank1 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 17vw;
+        margin-top: 63.9vh;
+        height: 3.5vw;
+        width: 3.5vw;
+        border-radius: 50%;
+        }
+
+        .user2 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 28.3vw;
+        margin-top: 75vh;
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #20222b;
+        height: 3.7vh;
+        width: 12vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .ownpic2 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 31.15vw;
+        margin-top: 41vh;
+        height: 6.5vw;
+        width: 6.3vw;
+        border-radius: 50%;
+        }
+
+        .plus2 {
+        z-index: 22;
+        position: absolute;
+        margin-left: 33.2vw;
+        margin-top: 40vh;
+        color: #20222b;
+        font-size: 5vw;
+        font-weight: 100;
+        user-select: none;
+        cursor: pointer;
+        user-select: none;
+        }
+
+        .rank2 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 32.6vw;
+        margin-top: 62.4vh;
+        height: 3.6vw;
+        width: 3.6vw;
+        border-radius: 50%;
+        }
+
+        .user3 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 44vw;
+        margin-top: 74vh;
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #20222b;
+        height: 4vh;
+        width: 12vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .ownpic3 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 46.75vw;
+        margin-top: 39.5vh;
+        height: 6.7vw;
+        width: 6.5vw;
+        border-radius: 50%;
+        }
+
+
+        .rank3 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 48.2vw;
+        margin-top: 61.4vh;
+        height: 3.8vw;
+        width: 3.8vw;
+        border-radius: 50%;
+        }
+
+        .user4 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 59.6vw;
+        margin-top: 75vh;
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #20222b;
+        height: 3.7vh;
+        width: 12vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+
+        .ownpic4 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 62.5vw;
+        margin-top: 41vh;
+        height: 6.5vw;
+        width: 6.3vw;
+        border-radius: 50%;
+        }
+
+        .plus3 {
+        z-index: 22;
+        position: absolute;
+        margin-left: 64.5vw;
+        margin-top: 39.5vh;
+        font-size: 5vw;
+        font-weight: 100;
+        color: #20222b;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        }
+
+        .rank4 {
+        z-index: 22;
+        position: absolute;
+        margin-left: 63.8vw;
+        margin-top: 62.4vh;
+        height: 3.6vw;
+        width: 3.6vw;
+        border-radius: 50%;
+        }
+
+        .user5 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 75.2vw;
+        margin-top: 76vh;
+        color: white;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        background-color: #20222b;
+        height: 3.5vh;
+        width: 12vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .ownpic5 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 78.3vw;
+        margin-top: 43.8vh;
+        height: 6vw;
+        width: 6vw;
+        border-radius: 50%;
+        }
+
+        .plus5 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 80.3vw;
+        margin-top: 42.4vh;
+        font-size: 5vw;
+        font-weight: 100;
+        color: #20222b;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        }
+
+        .plus2:hover {
+        color: white;
+        transition: color 0.2s ease;
+        }
+
+        .plus3:hover {
+        color: white;
+        transition: color 0.2s ease;
+        }
+
+        .plus4:hover {
+        color: white;
+        transition: color 0.2s ease;
+        }
+
+        .plus5:hover {
+        color: white;
+        transition: color 0.2s ease;
+        }
+
+        .rank5 {
+        z-index: 20;
+        position: absolute;
+        margin-left: 79.5vw;
+        margin-top: 63.9vh;
+        height: 3.5vw;
+        width: 3.5vw;
+        border-radius: 50%;
+        }
+
+
+        .sidebar {
+        grid-row: 9/12;
+        grid-column: 1;
+        background-color: #16171d;
+        margin-right: 2vw;
+        border-radius: 0.5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2vw;
+        transition: margin 0.2s ease, flex 0.2s ease, transform 0.3s ease;
+        cursor: pointer;
+        z-index: 201;
+        margin-left: -1vw;
+        }
+
+        .sidebar:hover {
+        margin-right: 1vw;
+        justify-content: flex-end;
+        padding-right: 0.5vw;
+        background-color: #252631;
+        }
+
+        .sidebar.move {
+        transform: translateX(14.5vw);
+        background-color: #252631;
+        }
+
+        .sidebarback {
+        grid-row: 8/17;
+        grid-column: 1/4;
+        background-color: #1c1d25;
+        z-index: 202;
+        transform: translateX(-15vw);
+        transition: transform 0.3s ease;
+        }
+
+
+        .sidebarback.move1 {
+        transform: translateX(0);
+        }
+
+        .inputs {
+        display: flex;
+        justify-content: center;
+        margin-top: 1vh;
+        }
+
+        .textback {
+        border: solid 2px #2f303d;
+        height: 38vh;
+        width: 14vw;
+        margin-left: 0.5vw;
+        margin-top: 0.5vw;
+        }
+
+        .sidebarbuts {
+        grid-row: 7;
+        grid-column: 1/3;
+        background-color: #1f2029;
+        border-radius: 1vw;
+        height: 7vh;
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 0.5vw;
+        transform: translateX(-10vw);
+        transition: transform 0.3s ease;
+        }
+
+        .sidebarbuts.move3 {
+        transform: translateX(0vw);
+        }
+
+        .chatbut {
+        height: 1.75vw;
+        width: 4vw;
+        background-color: #272833;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        border-radius: 0.2vw;
+        }
+
+        .chatbut:hover {
+        background-color: #30313f;
+        }
+
+        .joinbut {
+        height: 1.75vw;
+        width: 4vw;
+        background-color: #272833;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        border-radius: 0.2vw;
+        }
+
+        .joinbut:hover {
+        background-color: #30313f;
+        }
+
+        .joinback {
+        grid-row: 8/17;
+        grid-column: 1/4;
+        background-color: #1c1d25;
+        z-index: 202;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        font-size: 1vw;
+        padding-left: 0.5vw;
+        display: none;
+        }
+
+        .requestbuts {
+        border: solid 2px #2f303d;
+        height: 38vh;
+        width: 14vw;
+        margin-top: 1vw;
+        }
+
+        .te {
+        margin-left: 1vw;
+        margin-top: 1vh;
+        color: #454658;
+        }
+
+        .icon {
+        height: 1.5vw;
+        width: 1.5vw;
+        }
+
+        .txtin {
+        font-family: 'Orbitron', sans-serif;
+        color: #10283f;
+        background: #ffffff;
+        border: 3px solid #112d4e;
+        border-radius: 2px;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 10px rgba(17, 45, 78, 0.5);
+        font-weight: bold;
+        }
+
+
+
+        #butin {
+        background-color: #007bff; /* StackUp blue */
+        color: white;
+        border: none;
+        width: 3vw;
+        height: 2vh;
+        font-size: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-left: 2vw;
+        margin-top: 0.5vh;
+        }
+
+        .textinp {
+        width: 80%;
+        padding: 4px 8px;
+        font-family: 'Orbitron', sans-serif;
+        color: #10283f;
+        background: #ffffff;
+        border: 3px solid #112d4e;
+        border-radius: 2px;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 10px rgba(17, 45, 78, 0.5);
+        font-weight: bold;
+        }
+
+        input:hover {
+        border-color: #3a7ca5;
+        box-shadow: 0 0 5px rgba(58, 124, 165, 0.8);
+        }
+
+
+        input:focus {
+        border-color: #ffffff;
+        box-shadow: 0 0 7px rgba(255, 255, 255, 0.8);
+        }
+
+
+        input:disabled {
+        background: #e0e0e0;
+        color: #666;
+        border-color: #aaa;
+        cursor: not-allowed;
+        }
+
+
+        .stackup-button {
+        background-color: #007bff; /* StackUp blue */
+        color: white;
+        border: none;
+        width: 2vw;
+        padding: 3px 4px;
+        height: 4vh;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .stackup-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: scale(1.05); /* Slight zoom effect */
+        }
+
+        .stackup-button:active {
+        background-color: #004099; /* Even darker blue on click */
+        transform: scale(0.98); /* Click effect */
+        }
+
+
+        .request1 {
+        z-index: 30;
+        grid-row: 12/15;
+        grid-column: 7/9;
+        margin-left: 1vw;
+        margin-right: 2vw;
+        margin-top: 3vh;
+        opacity: 0;
+        transform: translateY(5vh);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .request2 {
+        grid-row: 12/15;
+        grid-column: 13/15;
+        z-index: 30;
+        margin-left: 2vw;
+        margin-right: 1vw;
+        margin-top: 3vh;
+        opacity: 0;
+        transform: translateY(5vh);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .request3 {
+        grid-row: 13/16;
+        grid-column: 4/6;
+        z-index: 30;
+        margin-right: 3vw;
+        opacity: 0;
+        transform: translateY(5vh);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .request4 {
+        grid-row: 13/16;
+        grid-column: 16/18;
+        z-index: 30;
+        margin-left: 3vw;
+        opacity: 0;
+        transform: translateY(5vh);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+
+        .show {
+        opacity: 1;
+        transform: translateY(0);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .invisible {
+        display: none;
+        }
+        .box{
+        grid-column: 1/21;
+        grid-row: 1/21;
+        background-color: #16171d;
+        z-index: 2;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        height: 30vh;
+        width: 25vw;
+        opacity: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+        grid-template-rows: repeat(4, 25%);
+        border-radius:2rem;
+        border: 0.5rem #252630;
+        }
+
+
+
+        .cancel {
+        grid-column: 4;
+        grid-row: 1;
+        height: 2vh;
+        width: 1vw;
+        margin-left: 5vw;
+        background-color: red;
+        color: white;
+        }
+
+
+        .form {
+        grid-column: 1/5;
+        grid-row: 2/5;
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        align-self: center;
+        }
+
+        .quest {
+        grid-column: 1/5;
+        grid-row: 2;
+        margin-left: 1vw;
+        font-size: 1.1vw;
+        text-align: center;
+        }
+
+        .sure {
+        grid-column: 1/4;
+        grid-row: 2;
+        font-size: 0.6vw;
+        margin-left: 6vw;
+        margin-top: 6vh;
+        }
+
+        .button {
+        height: 3vh;
+        width: 3vw;
+        background-color: #007bff; /* StackUp blue */
+        color: white;
+        border: none;
+        padding: 3px 4px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .disband {
+        height: 4vh;
+        width: 5vw;
+        background-color: #007bff; /* StackUp blue */
+        color: white;
+        border: none;
+        padding: 3px 4px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .psw {
+        padding: 4px 8px;
+        font-family: 'Orbitron', sans-serif;
+        color: #10283f;
+        background: #ffffff;
+        border: 3px solid #112d4e;
+        border-radius: 2px;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 10px rgba(17, 45, 78, 0.5);
+        text-transform: uppercase;
+        font-weight: bold;
+        }
+
+        .Action {
+        color: white;
+        background-color: red;
+        grid-column:1/5;
+        grid-row: 3/5;
+        display:flex;
+        justify-self: center;
+        align-items: center;
+        padding:0.2vw;
+        border-radius: 0.3vw;
+        }
+
+        .Action:hover{
+            transform: scale(1.1);
+            background-color: darkred;
+            margin-top: -1vh;
+            transition: transform 0.2s ease, background-color 0.2s ease, margin-top 0.2s ease;
+        }
+
+
+
+
+        .leave {
+            color: white;
+            background-color: red;
+            grid-area: 4/17/4/19;
+            z-index: 30;
+            display: flex;
+            justify-self: center;
+            align-items: center;
+            padding: 0.2vw;
+            border-radius: 0.3vw;
+            cursor: pointer;
+        }
+
+            .leave:hover {
+                transform: scale(1.1);
+                background-color: darkred;
+                margin-top: -1vh;
+                transition: transform 0.2s ease, background-color 0.2s ease, margin-top 0.2s ease;
+            }
+
+
+        .disbanding {
+        grid-row: 4;
+        grid-column: 13/15;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .confirm {
+        grid-column: 9/13;
+        grid-row: 8/13;
+        background-color: #16171d;
+        z-index: 1;
+        opacity:0;
+        }
+
+        .quest1 {
+        margin-left: 1vw;
+        font-size: 1.1vw;
+        padding: 1vw;
+        margin-top: 3vh;
+        text-align: center;
+        }
+
+        .yes {
+        background-color: green;
+        color: white;
+        width: 3vw;
+        height: 3vh;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        margin-left: 5vw;
+        margin-top: 5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor:pointer;
+        }
+
+        .yes:hover {
+        background-color: darkgreen;
+        transform: scale(1.05);
+        }
+
+        .no {
+        background-color: red;
+        color: white;
+        width: 3vw;
+        height: 3vh;
+        margin-top: -3vh;
+        margin-left: 12.5vw;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        cursor: pointer;
+        }
+
+        .no:hover {
+        background-color: darkred;
+        transform: scale(1.05);
+        }
+
+
+        .kick2 {
+        grid-row: 19;
+        grid-column: 7/9;
+        display: flex;
+        justify-content: center;
+        align items: center;
+        width: 5vw;
+        background-color: red;
+        color: white;
+        margin-left: 1.75vw;
+        margin-top: 2vh;
+        padding-top: 0.5vh;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        opacity:0.7;
+        cursor: pointer;
+        }
+
+        .kick2:hover {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        }
+
+        .kick1 {
+        grid-row: 19;
+        grid-column: 3/6;
+        display: flex;
+        justify-content: center;
+        align items: center;
+        width: 5vw;
+        background-color: red;
+        color: white;
+        margin-left: 6vw;
+        margin-top: 2vh;
+        padding-top: 0.5vh;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        opacity: 0.7;
+        cursor: pointer;
+        }
+
+
+        .kick1:hover {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        }
+
+        .kick4 {
+        grid-row: 19;
+        grid-column: 13/15;
+        display: flex;
+        justify-content: center;
+        align items: center;
+        width: 5vw;
+        background-color: red;
+        color: white;
+        margin-left: 3.25vw;
+        margin-top: 2vh;
+        padding-top: 0.5vh;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        opacity: 0.7;
+        cursor: pointer;
+        }
+
+
+        .kick4:hover {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        }
+
+        .kick5 {
+        grid-row: 19;
+        grid-column: 16/19;
+        display: flex;
+        justify-content: center;
+        align items: center;
+        width: 5vw;
+        background-color: red;
+        color: white;
+        margin-left: 4vw;
+        margin-top: 2vh;
+        padding-top: 0.5vh;
+        font-weight: Bolder;
+        font-family: 'Orbitron', sans-serif;
+        opacity: 0.7;
+        cursor:pointer;
+        }
+
+
+        .kick5:hover {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        }
+        .red{
+        color:red;
+        z-index:1312321312321;
+        font-size: 0.6vw;
+        padding-left: 0.75vw;
+        align-content: center;
+        }
+
+        .green {
+        color: green;
+        z-index: 1312321312321;
+        font-size: 0.6vw;
+        padding-left: 0.5vw;
+        align-content: center;
+        }
+
+
+        .name23{
+        color: cornflowerblue;
+        }
+
+        .input1{
+        display:none;
+        }
+        .error{
+        grid-area:19/9/21/13;
+        text-align: center;
+        margin-top: 2vh;
+        } 
+
+
+        #txtin4 {
+        padding-left:13%;
+        }
+
+        #txtin3 {
+        padding-left:13%;
+        }
+
+        #txtin2 {
+        padding-left:13%;
+        }
+
+        #txtin1 {
+        padding-left: 13%;
+        }
+
+
+        .searchicon {
+        grid-column: 14/16;
+        grid-row: 1/3;
+        display: flex;
+        align-self: center;
+        height: 1.5vw;
+        width: 1.5vw;
+        justify-self: center;
+        z-index: 1000001;
+        opacity: 0.6;
+        }
+
+        #searchInput {
+        height: 5vh;
+        width: 17.5vw;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        color: white;
+        background-color: #22232c;
+        border: none;
+        text-indent: 2.3vw;
+        border-radius: 1vw;
+        }
+
+        #searchInput:focus {
+        outline: none;
+        }
+
+        .Search {
+        grid-column: 14/19;
+        grid-row: 1/3;
+        z-index: 100000;
+        }
+
+        .Sigma {
+        grid-column: 14/19;
+        grid-row: 1/3;
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        z-index: 100000;
+        }
+
+           .Ninja{
+        all: unset;
+        font-family: 'Orbitron', sans-serif;
+        }
+        .box2{
+        grid-area: 3/18/10/21;
+        z-index: 0;
+        opacity: 0;
+        margin-left: -2vw;
+
+        }
+        .inbox{
+        all: unset;
+        font-family: 'Orbitron', sans-serif;
+        cursor:pointer;
+        opacity: 0.7;
+        font-size: 0.8vw;
+        padding-right: 2vw;
+        }
+    </style>
+
+
+
+</head>
+ @model System.Data.DataTable
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+
+<body>
+    <div id="grid">
+
+        <div class="hotbar">
+            <div id="hotbaritems">
+                <a href="@Url.Action("Index", "Home" )" id="logo">
+                    <img src="~/Bilder/stackuplogo.png" href="@Url.Action("Index", "Home" )" width="75" height="75" id="logo">
+                </a>
+                <div class="logotitle">Stack | <span class="aa">Up</span></div>
+
+                <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+                @if (Context.Session.GetString("_InloggStatus") == "yes")
+                {
+                    <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="1"></vc:check>
+
+                }
+            </div>
+            <div id="hotbarlogs">
+                 @if (Context.Session.GetString("_InloggStatus") != "yes")
+                {
+                     <a class="hotbarbuttons" href="@Url.Action("Create", "Home")">Sign Up</a> 
+                    <a href="@Url.Action("LogIn", "Home")" class="hotbarbuttons">Log in</a>
+                } else
+                {
+                    <button class="hotbarbuttons inbox">Inbox</button>
+                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="60" height="60" id="Profilepic" class="hotprof">
+
+                }
+            </div>
+        </div>
+
+          @if (Context.Session.GetString("_InloggStatus") == "yes")
+        {
+
+            <div class="box2"><vc:requests></vc:requests></div>
+
+            <div class="topsec">
+                <div class="topsecfirst">
+                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
+                    <p class="marg">@Model.Rows[0]["Username"]<span class="tag">@Model.Rows[0]["tagline"]</span></p>
+                </div>
+                <div class="topsecsecond">
+                    <img src="~/Bilder/@Model.Rows[0]["rank"]" alt="" class="popdownicon">
+
+                </div>
+            </div>
+
+
+            <div class="popdown">
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("LogOut", "Home")">LogOut</a>
+
+                </div>
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("Settings", "Home")">Settings</a>
+                </div>
+                @if(Convert.ToInt32(Model.Rows[0]["TID"]) == 0)
+                {
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+                            <input class="Search" name="input" type="hidden"  value="" />
+                            <input class="Ninja" type="submit" value="Join Team"/>
+                        </form>
+
+                    </div>
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="popdownbuttons">
+                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                        <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
+
+                    </div>
+                }
+
+
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Profile.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">View Profile</a>
+                </div>
+
+            </div>
+        }
+        @* ///////////////////////////////////////////////////////////////////////////////////////////// *@
+        <div class="back"></div>
+
+        <h1 class="tit">@Model.Rows[0]["Name"]</h1>
+
+
+        @if (Model.Rows.Count == 1 && Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <p class="plus2">+</p>
+            <p class="plus3">+</p>
+            <p class="plus4">+</p>
+            <p class="plus5">+</p>
+        }     
+
+        @if (Model.Rows.Count == 2 && Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <p class="plus3">+</p>
+            <p class="plus4">+</p>
+            <p class="plus5">+</p>
+        }
+
+        @if (Model.Rows.Count == 3 && Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <p class="plus4">+</p>
+            <p class="plus5">+</p>
+        }
+
+        @if (Model.Rows.Count == 4 && Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <p class="plus5">+</p>
+        }
+
+        <div class="banner">
+
+            <img src="~/Bilder/banner122.png" alt=""  id="farbanner">
+            <img src="~/Bilder/banner122.png" alt="" id="outerbanner">
+            <img src="~/Bilder/banner122.png" alt="" id="centerbanner">
+            <img src="~/Bilder/banner122.png" alt="" id="outerbanner">
+            <img src="~/Bilder/banner122.png" alt="" id="farbanner">
+        </div>
+        @if(Model.Rows.Count > 0)
+        {
+            bool ben = false;
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+
+                @if (Convert.ToInt32(Model.Rows[i]["UID"]) == Convert.ToInt32(ViewData["LID"]))
+                {
+                    <div class="user3">@Model.Rows[i]["UserName"]</div>
+                    <img src="/Bilder/@Model.Rows[i]["Picture"]" alt="" class="ownpic3">
+                    <img src="~/Bilder/@Model.Rows[i]["rank"]" alt="" class="rank3">
+
+                    ben = true;
+
+                }
+                if (ben == true)
+                {
+                    int y = i + 1;
+                    if(y >= Model.Rows.Count)
+                    {
+                        break;
+                    }
+                    @if (i == 0)
+                    {
+                        <div class="user2">@Model.Rows[y]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[y]["Picture"]" alt="" class="ownpic2">
+                        <img src="~/Bilder/@Model.Rows[y]["rank"]" alt="" class="rank2">
+                        <p class="id2">@Model.Rows[y]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick2">Kick</button>
+                        }
+                    }
+                    @if (i == 1)
+                    {
+                        <div class="user4">@Model.Rows[y]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[y]["Picture"]" alt="" class="ownpic4">
+                        <img src="~/Bilder/@Model.Rows[y]["rank"]" alt="" class="rank4">
+                        <p class="id4">@Model.Rows[y]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick4">Kick</button>
+                        }
+
+                    }
+                    @if (i == 2)
+                    {
+                        <div class="user1">@Model.Rows[y]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[y]["Picture"]" alt="" class="ownpic1">
+                        <img src="~/Bilder/@Model.Rows[y]["rank"]" alt="" class="rank1">
+                        <p class="id1">@Model.Rows[y]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick1">Kick</button>
+                        }
+                    }
+                    @if (i == 3)
+                    {
+                        <div class="user5">@Model.Rows[y]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[y]["Picture"]" alt="" class="ownpic5">
+                        <img src="~/Bilder/@Model.Rows[y]["rank"]" alt="" class="rank5">
+                        <p class="id5">@Model.Rows[y]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick5">Kick</button>
+                        }
+                    }
+                }
+                if (ben == false)
+                {
+                    @if (i == 0)
+                    {
+                        <div class="user2">@Model.Rows[i]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[i]["Picture"]" alt="" class="ownpic2">
+                        <img src="~/Bilder/@Model.Rows[i]["rank"]" alt="" class="rank2">
+                        <p class="id2">@Model.Rows[i]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick2">Kick</button>
+                        }
+                    }
+                    @if (i == 1)
+                    {
+                        <div class="user4">@Model.Rows[i]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[i]["Picture"]" alt="" class="ownpic4">
+                        <img src="~/Bilder/@Model.Rows[i]["rank"]" alt="" class="rank4">
+                        <p class="id4">@Model.Rows[i]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick4">Kick</button>
+                        }
+                    }
+                    @if (i == 2)
+                    {
+                        <div class="user1">@Model.Rows[i]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[i]["Picture"]" alt="" class="ownpic1">
+                        <img src="~/Bilder/@Model.Rows[i]["rank"]" alt="" class="rank1">
+                        <p class="id1">@Model.Rows[i]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick1">Kick</button>
+                        }
+                    }
+                    @if (i == 3)
+                    {
+                        <div class="user5">@Model.Rows[i]["UserName"]</div>
+                        <img src="/Bilder/@Model.Rows[i]["Picture"]" alt="" class="ownpic5">
+                        <img src="~/Bilder/@Model.Rows[i]["rank"]" alt="" class="rank5">
+                        <p class="id5">@Model.Rows[i]["UID"]</p>
+                        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+                        {
+                            <button class="kick5">Kick</button>
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        <div class="Confirm">
+            <p class="quest1">Are you sure you want to kick: <span class="name23"></span> ?</p>
+            <a class="yes" href="">Confirm</a>
+            <div class="no">Cancel</div>
+        </div>
+        <div class="error">
+            <p class="red">@ViewData["Boop"]</p>
+        </div>
+
+
+
+        @if(Context.Session.GetInt32("TID") == Convert.ToInt32(ViewData["TID"]))
+            {
+        <div class="sidebar">
+            <p id="pil">></p>
+        </div>
+            }
+        <div class="sidebarback">
+            <div class="textback">
+                <vc:Message Lobby="0" LID="0" TID="@Convert.ToInt32(ViewData["TID"])"></vc:Message>
+            </div>
+            <div class="inputs">
+                <form class="form" method="post" class="form" action="@Url.Action("Message","Home", new{TID = Context.Session.GetInt32("TID"), Lobby = false})" enctype="multipart/form-data">
+                    <input type="text" name="Content" class="textinp">
+                    <input type="submit" value=">" class="stackup-button">
+                </form>
+
+            </div>
+        </div>
+
+        <div class="sidebarbuts">
+            <div class="chatbut">
+                <img src="~/Bilder/chatbub11.png" class="icon">
+            </div>
+            @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+            {
+                            <div class="joinbut"> 
+                <img src="~/Bilder/request.png" class="icon">
+            </div>
+
+            }
+        </div>
+        @if(Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <div class="Joinback">
+                <p class="te">Requests to join team</p>
+
+                <div class="requestbuts"><vc:joins></vc:joins></div>
+
+            </div>
+        }
+        
+        @if (Context.Session.GetInt32("UID") == Convert.ToInt32(ViewData["LID"]))
+        {
+            <div class="disbanding">
+            <button class="disband">Disband Team</button>
+            </div>
+            <div class="box invisible">
+                <p class="quest">Are you sure you want to disband team?</p>
+                <p class="sure">Enter Password to confirm:</p>
+                <form class="form" method="post" action="@Url.Action("DeleteTeam","Home", new { tid = Context.Session.GetInt32("TID") })" enctype="multipart/form-data">
+                    <input type="password" name="password" required class="psw" />
+                    <p>@ViewData["incorrect"]</p>
+                    <input class="button" type="submit" value="Disband" />
+                </form>
+                <button class="cancel">x</button>
+            </div>
+            <input type="hidden" class="input1" value="@ViewData["Check"]" />
+
+        }
+        else
+        {
+            @if(Context.Session.GetInt32("TID") == Convert.ToInt32(ViewData["TID"]))
+            {
+                   <div class="disbanding">
+            <button class="leave">Leave Team</button>
+            </div>
+            <div class="box">
+                <p class="quest">Are you sure you want to leave the team?</p>
+
+                <a class="Action" href="@Url.Action("Leave", "Home")">Leave</a>
+                <button class="cancel">X</button>
+      
+        </div> 
+            }
+        
+        } 
+
+
+        <div class="request1">
+            <form method="post" class="form" action="@Url.Action("CreateRequest","Home", new{TID = Context.Session.GetInt32("TID"), input = 0})">
+                <input type="text" name="Request"  id="txtin1" class="txtin"/>
+                <input class="button" type="submit" value="Invite" id="butin"/>
+                <p class="red">@ViewData["text0"]</p>
+                <p class="green">@ViewData["bext0"]</p>
+
+
+            </form>
+        </div>
+        <div class="request2">
+            <form method="post" class="form" action="@Url.Action("CreateRequest","Home", new{TID = Context.Session.GetInt32("TID"),input = 1})">
+                <input type="text" name="Request" id="txtin2" class="txtin" />
+                <input class="button" type="submit" value="Invite" id="butin" />
+                <p class="red">@ViewData["text1"]</p>
+                <p class="green">@ViewData["bext1"]</p>
+
+            </form>
+        </div>
+        <div class="request3">
+            <form method="post" class="form" action="@Url.Action("CreateRequest","Home", new{TID = Context.Session.GetInt32("TID"),input = 2})">
+                <input type="text" name="Request" id="txtin3" class="txtin" />
+                <input class="button" type="submit" value="Invite" id="butin" />
+                <p class="red">@ViewData["text2"]</p>
+                <p class="green">@ViewData["bext2"]</p>
+
+            </form>
+        </div>
+        <div class="request4">
+            <form method="post" class="form" action="@Url.Action("CreateRequest","Home", new{TID = Context.Session.GetInt32("TID"),input = 3})">
+                <input type="text" name="Request" id="txtin4" class="txtin" />
+                <input class="button" type="submit" value="Invite" id="butin" />
+                <p class="red">@ViewData["text3"]</p>
+                <p class="green">@ViewData["bext3"]</p>
+
+            </form>
+        </div>
+        <div class="request5">
+            <form method="post" class="form" action="@Url.Action("CreateRequest","Home", new{TID = Context.Session.GetInt32("TID"),input = 4})">
+                <input type="text" name="Request" class="txtin"/>
+                <input class="button" type="submit" value="Invite"/>
+                <p class="red">@ViewData["text4"]</p>
+                <p class="green">@ViewData["bext4"]</p>
+
+            </form>
+        </div>
+
+
+        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+            <input class="Search" name="input" type="text" id="searchInput" placeholder="Search Players" />
+        </form>
+        <img class="searchicon" src="~/Bilder/searchicon.png">
+
+
+    </div>
+    <p class="Jean">@ViewData["Check1"]</p>
+
+    <script>
+
+     
+        const Profilepic = document.querySelector('#Profilepic')
+        const popdown = document.querySelector('.popdown')
+        const topsec = document.querySelector('.topsec')
+        const sidebar = document.querySelector('.sidebar')
+        const sidebarback = document.querySelector('.sidebarback')
+        const pil = document.querySelector('#pil')
+        const sidebarbuts = document.querySelector('.sidebarbuts')
+        const chatbut = document.querySelector('.chatbut')
+        const joinbut = document.querySelector('.joinbut')
+        const joinback = document.querySelector('.joinback')
+        const plus1 = document.querySelector('.plus2')
+        const plus2 = document.querySelector('.plus3')
+        const plus3 = document.querySelector('.plus4')
+        const plus4 = document.querySelector('.plus5')
+        const request1 = document.querySelector('.request1')
+        const request2 = document.querySelector('.request2')
+        const request3 = document.querySelector('.request3')
+        const request4 = document.querySelector('.request4')
+
+        const kick2 = document.querySelector('.kick2')
+        const kick4 = document.querySelector('.kick4')
+        const kick1 = document.querySelector('.kick1')
+         const kick5 = document.querySelector('.kick5')
+
+         const confirm = document.querySelector('.Confirm')
+         const no = document.querySelector('.no')
+            const yes = document.querySelector('.yes')
+          const nameBen = document.querySelector('.name23')
+        const user2 = document.querySelector('.user2') ? document.querySelector('.user2').textContent : '';
+        const user4 = document.querySelector('.user4') ? document.querySelector('.user4').textContent : '';
+        const user1 = document.querySelector('.user1') ? document.querySelector('.user1').textContent : '';
+        const user5 = document.querySelector('.user5') ? document.querySelector('.user5').textContent : '';
+
+                  const id2 = document.querySelector('.id2') ? document.querySelector('.id2').textContent : '';
+           const id4 = document.querySelector('.id4') ? document.querySelector('.id4').textContent : '';
+           const id1 = document.querySelector('.id1') ? document.querySelector('.id1').textContent : '';
+           const id5 = document.querySelector('.id5') ? document.querySelector('.id5').textContent : '';
+
+         document.addEventListener('DOMContentLoaded', () => {
+
+         const baseUrl = '@Url.Action("Kick", "Home")';
+
+
+             const Btn = document.querySelector('.inbox')
+          const board2 = document.querySelector('.box2')
+
+        if (Btn != null ){
+                    Btn.addEventListener("click", function () {
+                        if(board2.style.opacity == 0){
+                        board2.style.opacity = "1";
+                        board2.style.zIndex= "1000";
+
+                        }else{
+                        board2.style.opacity = "0";
+                        board2.style.zIndex= "-1";
+                        }
+
+                   });
+              }
+
+
+
+
+         if (kick2 != null)
+         {
+         kick2.addEventListener("click", function () {
+             confirm.style.opacity = 1;
+                confirm.style.zIndex = 21;
+             if (user2 != null){
+             nameBen.textContent = user2;
+             }
+             if (id2 != null){
+                    yes.href = `${baseUrl}?UID=${encodeURIComponent(id2)}`;
+             }
+         });
+         }
+
+           if (kick1 != null) 
+           {
+         kick1.addEventListener("click", function () {
+              confirm.style.opacity = 1;
+                 confirm.style.zIndex = 21;
+              if (user1 != null){
+              nameBen.textContent = user1;
+              }
+                  if (id1 != null){
+                       yes.href = `${baseUrl}?UID=${encodeURIComponent(id1)}`;
+                }
+         });
+           }
+
+
+
+         if (kick4 != null) 
+         {
+         kick4.addEventListener("click", function () {
+              confirm.style.opacity = 1;
+                 confirm.style.zIndex = 21;
+              if (user4 != null){
+              nameBen.textContent = user4;
+              }
+                  if (id4 != null){
+                       yes.href = `${baseUrl}?UID=${encodeURIComponent(id4)}`;
+                }
+         });
+         }
+
+
+         if (kick5 != null) 
+         {
+          kick5.addEventListener("click", function () {
+               confirm.style.opacity = 1;
+                  confirm.style.zIndex = 21;
+               if (user5 != null){
+              nameBen.textContent = user5;
+               }
+                   if (id5 != null){
+                       yes.href = `${baseUrl}?UID=${encodeURIComponent(id5)}`;
+                }
+          });
+         }
+         });
+
+
+         if (no != null) {
+           no.addEventListener("click", function () {
+                  confirm.style.zIndex = 20;
+                 confirm.style.opacity = 0;
+
+          });
+         }
+     
+
+
+
+          
+       
+
+        const disbandBtn2 = document.querySelector('.disband')
+
+        const disbandBtn = document.querySelector('.leave')
+          const cancelBtn = document.querySelector('.cancel')
+          const board = document.querySelector('.box')
+
+     if (disbandBtn2 != null ){
+           disbandBtn2.addEventListener("click", function () {
+              board.classList.remove("invisible");
+               board.style.opacity = "1";
+                  board.style.zIndex = 21;
+          });
+     }
+
+         if (disbandBtn != null ){
+              disbandBtn.addEventListener("click", function () {
+                 board.classList.remove("invisible");
+                  board.style.opacity = "1";
+                     board.style.zIndex = 21;
+             });
+        }
+
+               if (disbandBtn2 != null ){
+                     disbandBtn2.addEventListener("click", function () {
+               board.classList.remove("invisible");
+           });
+               }           
+
+          cancelBtn.addEventListener("click", function () {
+                 board.style.zIndex = 20;
+              board.style.opacity = "0";
+                 
+          });
+
+                       if (document.querySelector(".input1"))
+                       {
+                        if (document.querySelector(".input1").value == "yes") {
+                   board.classList.remove("invisible");
+                   board.style.opacity = "1";
+
+               };
+                       }
+
+
+
+
+               if (document.querySelector('.Jean').textContent == "0") {
+                      request1.classList.add('show');
+                  } else if (document.querySelector('.Jean').textContent == "1") {
+                     request2.classList.add('show');
+                     } else if (document.querySelector('.Jean').textContent == "2") {
+                            request3.classList.add('show');
+                        } else if (document.querySelector('.Jean').textContent == "3") {
+                               request4.classList.add('show');
+                        };
+
+
+
+       Profilepic.addEventListener("click", function () {
+
+           if (topsec.classList.contains('clicked')){
+               topsec.classList.remove('clicked'); 
+               popdown.classList.remove('clicked');
+           } else {
+               topsec.classList.add('clicked'); 
+               popdown.classList.add('clicked');
+           }
+
+       });
+
+       sidebar.addEventListener("click", function () {
+        if (sidebar.classList.contains('move')) {
+               if( document.querySelector('.joinback'))
+               {
+                                  joinback.style.display = "none";
+               }
+            sidebarback.style.display = "block";
+            sidebar.classList.remove('move')
+            sidebarback.classList.remove('move1')
+            pil.textContent = ">"
+            sidebarbuts.classList.remove('move3')
+            console.log("removed");
+        } else {
+            sidebar.classList.add('move')
+            sidebarback.classList.add('move1')
+            pil.textContent = "<"
+            sidebarbuts.classList.add('move3')
+        }
+       })
+       if(document.querySelector(".REP").textContent == "1"){
+               sidebar.classList.add('move')
+               sidebarback.classList.add('move1')
+               pil.textContent = "<"
+               sidebarbuts.classList.add('move3')
+       }
+
+       if (plus1 != null) {
+                   plus1.addEventListener ("click", function (){
+         if (request1.classList.contains('show')) {
+             request1.classList.remove('show');
+         } else {
+             request1.classList.add('show');
+         }
+        })
+
+       }
+
+        if (plus2 != null) {
+                           plus2.addEventListener ("click", function (){
+         if (request2.classList.contains('show')) {
+             request2.classList.remove('show');
+         } else {
+             request2.classList.add('show');
+         }
+
+        })
+        }
+
+
+         if (plus3 != null)
+         {
+                            plus3.addEventListener ("click", function (){
+         if (request3.classList.contains('show')) {
+             request3.classList.remove('show');
+         } else {
+             request3.classList.add('show');
+         }
+        })
+         }
+
+         if (plus4 != null) {
+                             plus4.addEventListener ("click", function (){
+          if (request4.classList.contains('show')) {
+              request4.classList.remove('show');
+          } else {
+              request4.classList.add('show');
+          }
+         })
+         }
+
+
+
+       chatbut.addEventListener("click", function () {
+            if( document.querySelector('.joinback'))
+                  {
+                                     joinback.style.display = "none";
+                  }
+        sidebarback.style.display = "block";
+       })
+
+
+          if(document.querySelector('.joinbut')){
+                        joinbut.addEventListener("click", function () {
+               if( document.querySelector('.joinback'))
+                     {
+                                        joinback.style.display = "block";
+                     }
+           sidebarback.style.display = "none";
+          })
+          }
+
+       
+   </script>
+</body>

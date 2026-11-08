@@ -1,0 +1,1 @@
+﻿SELECT u.UserName, u.tagline, u.Password, u.Picture, t.Name AS TeamName, t.[Desc] AS TeamDesc, t.TID FROM UserTable u INNER JOIN TeamTable t ON u.TID = t.TID WHERE UID = 13;

@@ -1,0 +1,136 @@
+﻿<head>
+    <style>
+
+        .behind{
+            color: white;
+            font-weight: Bolder;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #16171d;
+            border-radius: 0.5em;
+            padding-left: 0.2vw;
+            margin-left: 2.5%;
+            margin-top: 2vh;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(1, 1fr);
+            height: 8vh;
+            width: 95%;
+        }
+
+        .behind:hover{
+                background-color: #242530;
+                transition: background-color 0.2s ease;
+        }
+
+        .Profile12 {
+            background-color: rgb(33, 99, 175);
+            text-align: center;
+            color: white;
+            height: 3vh;
+            width: 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+            font-size: 0.6vw;
+            transform: translateX(-0.5vw);
+        }
+
+            .Profile12:hover {
+                transform: translateY(-3px) translateX(-0.5vw);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                background-color: rgb(47, 144, 255);
+                transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+
+        
+
+            .content {
+            grid-column: 1/5;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 0.5vw;
+            }
+
+        .flow {
+            height: 60vh;
+            overflow-y: scroll;
+            z-index: 300;
+            scrollbar-color: #242530 #1c1d25;
+            scrollbar-width: thin;
+        }
+
+
+
+
+            .rightcont {
+            grid-column: 4;
+            grid-row: 1;
+                    display: flex;
+        justify-content: center;
+        align-items: center;
+            }
+
+
+        #tag1 {
+            color: grey;
+            font-weight: 100;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7vw;
+            opacity: 0.7;
+        }
+
+        #blue{
+            color: cornflowerblue;
+            
+        }
+
+        #aaa{
+            margin-left:-7vw;
+        }
+
+        #pic1212{
+            background-color: #242530;
+            border-radius:50%;
+            outline: solid #242530 5px;
+        }
+
+    </style>
+</head>
+<div class="Results" id="searchResults">
+
+<div class="flow">
+
+@model System.Data.DataTable
+
+
+@if(Convert.ToString(ViewData["boom"]) != "yes")
+{
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        <div class="behind">
+            <div class="content">
+                <img src="~/Bilder/@Model.Rows[i]["Picture"]" height="60" width="60" id="pic1212"/>
+                <p id="aaa">@Model.Rows[i]["UserName"]<span id="tag1">@Model.Rows[i]["tagline"]</span></p>
+                @if(Convert.ToInt32(Model.Rows[i]["TID"]) == 0)
+                {
+                        <p>Team: <span id="blue">None</span></p>
+                } else{
+                    <p>Team: <span id="blue">@Model.Rows[i]["name"]</span></p>
+                }
+               
+         
+            <a class="Profile12" href="@Url.Action("Profile", "Home", new{UID = Model.Rows[i]["UID"]})">View Profile</a>
+                </div>
+        </div>
+    }
+}
+</div>
+
+                </div>
+
+
+<p class="play"><span id="blue1">@ViewData["Count"]</span>Users found</p>
