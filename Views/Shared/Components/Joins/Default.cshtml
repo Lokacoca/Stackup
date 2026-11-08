@@ -31,41 +31,41 @@
         .request {
             background-color: #272833;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            height: 10vh;
+            min-height: 108px;
+        padding: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
-            width: 13vw;
+            width: 100%;
             user-select: none;
-            display: grid;
-            grid-template-columns: repeat(4,25%);
-            grid-template-rows: repeat(4,25%);
+            display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
         }
 
         .accept {
             background-color: rgb(62, 128, 62);
             text-align: center;
             color: white;
-            height: 3vh;
-            width: 3vw;
+            padding: 6px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             user-select: none;
             cursor: pointer;
-            font-size: 0.6vw;
+            font-size: 12px;
         }
 
         .decline {
             background-color: rgb(187, 70, 66);
             text-align: center;
             color: white;
-            height: 3vh;
-            width: 3vw;
+            padding: 6px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             user-select: none;
             cursor: pointer;
-            font-size: 0.6vw;
+            font-size: 12px;
         }
 
         .flexing {
@@ -83,7 +83,7 @@
             grid-column: 1/5;
             display: flex;
             justify-content: center;
-           margin-top: 1vh;
+           margin-top: 4px;
         }
 
 
@@ -91,14 +91,13 @@
             background-color: rgb(33, 99, 175);
             text-align: center;
             color: white;
-            height: 3vh;
-            width: 3vw;
+            padding: 6px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             user-select: none;
             cursor: pointer;
-            font-size: 0.6vw;
+            font-size: 12px;
         }
 
             .Profile12:hover {

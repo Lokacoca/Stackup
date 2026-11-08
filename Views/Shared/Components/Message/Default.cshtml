@@ -40,21 +40,21 @@
         color: white;
         font-weight: 300;
         font-family: 'Orbitron', sans-serif;
-        font-size: 0.7vw;
+        font-size: 13px;
         }
 
         #content1 {
         color: white;
         font-weight: 300;
         font-family: 'Orbitron', sans-serif;
-        font-size: 0.7vw;
+        font-size: 13px;
         }
 
         #tag {
         color: grey;
         font-weight: 100;
         font-family: 'Orbitron', sans-serif;
-        font-size: 0.6vw;
+        font-size: 12px;
         opacity: 0.7;
         }
 
@@ -62,7 +62,7 @@
         color: grey;
         font-weight: 100;
         font-family: 'Orbitron', sans-serif;
-        font-size: 0.6vw;
+        font-size: 12px;
         opacity: 0.7;
         }
 
@@ -81,23 +81,22 @@
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-evenly;
-        margin-left: -2vw;
-        padding-left: -1vw;
+        padding-right: 10px;
         }
 
 
 
         .pic {
-        height:3vw;
-        width:3vw;
+        height: 58px;
+        width: 58px;
         grid-column: 1;
         grid-row: 1;
         border-radius:50%;
         }
 
         .pic1 {
-        height: 3vw;
-        width: 3vw;
+        height: 58px;
+        width: 58px;
         grid-column: 4;
         grid-row: 1;
             border-radius: 50%;
@@ -137,78 +136,29 @@
 </head>
 
 <div class="flow">
-    @if(Convert.ToInt32(ViewData["Check"]) == 1)
-    {
-        @for (int i = 0; i < Model.Rows.Count; i++)
-        {
-
-            if (Context.Session.GetInt32("TID") == Model.Rows[i]["TID"])
-            {
-                <div class="MessageTeam">
-
-                    <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
-
-                    <div class="text">
-                        <p id="content">@Model.Rows[i]["Content"] </p>
-                        <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-
-                    </div>
-                </div>
-            }
-            else
-            {
-
-                <div class="MessageOpp">
-
-                    <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic1">
-
-                    <div class="text1">
-                        <p id="content1">@Model.Rows[i]["Content"] </p>
-                        <p id="user1">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-
-                    </div>
-                </div>
-
-
-            }
-        }
-
-   
-
-    }
-    else
-    {
-        
-
+    @* Same look for team and lobby chat: own messages on the right, everyone else on the left. *@
     @for (int i = 0; i < Model.Rows.Count; i++)
     {
-        if (Context.Session.GetInt32("UID") == Model.Rows[i]["UID"])
+        if (Convert.ToInt32(Model.Rows[i]["UID"]) == Context.Session.GetInt32("UID"))
         {
             <div class="Message1">
-
                 <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic1">
-
                 <div class="text1">
                     <p id="content1">@Model.Rows[i]["Content"] </p>
                     <p id="user1">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-
-                </div>
-            </div>
-        } else {
-            <div class="Message">
-
-                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
-
-                <div class="text">
-                    <p id="content">@Model.Rows[i]["Content"] </p>
-                    <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-
                 </div>
             </div>
         }
-
- 
-}
+        else
+        {
+            <div class="Message">
+                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
+                <div class="text">
+                    <p id="content">@Model.Rows[i]["Content"] </p>
+                    <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
+                </div>
+            </div>
+        }
     }
 
 <p class="REP">@ViewData["REP"]</p>

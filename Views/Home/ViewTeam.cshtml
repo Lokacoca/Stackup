@@ -1,5 +1,6 @@
 ﻿
 <head>
+    <link rel="stylesheet" href="~/css/decor.css" />
     <style>
 
 
@@ -52,7 +53,7 @@
         width: 50vw;
         margin-left: 3vw;
         height: 10vh;
-        font-size: 1vw;
+        font-size: 19px;
         font-family: 'Orbitron', sans-serif;
         font-weight: bolder;
         color: white;
@@ -74,7 +75,7 @@
         align-items: center;
         width: 50vw;
         height: 10vh;
-        font-size: 1vw;
+        font-size: 19px;
         font-family: 'Orbitron', sans-serif;
         font-weight: bolder;
         color: white;
@@ -112,7 +113,7 @@
 
         .climb {
         color: white;
-        font-size: 3vw;
+        font-size: 58px;
         grid-column: 1/21;
         grid-row: 4/7;
         display: flex;
@@ -125,7 +126,7 @@
 
         .climb2 {
         color: white;
-        font-size: 1.5vw;
+        font-size: 29px;
         grid-column: 6/16;
         grid-row: 6/9;
         display: flex;
@@ -153,7 +154,7 @@
         align-items: center;
         font-family: 'Orbitron', sans-serif;
         font-weight: 800;
-        font-size: 1vw;
+        font-size: 19px;
         transition: transform 0.2s ease, background-color 0.2s ease, font-weight 0.2s ease;
         }
 
@@ -189,7 +190,7 @@
         .hotbarbuttons {
         margin-left: 1.5vw;
         opacity: 0.7;
-        font-size: 0.8vw;
+        font-size: 15px;
         transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
         cursor: pointer;
         }
@@ -203,7 +204,7 @@
         .counters {
         grid-row: 17;
         grid-column: 1/21;
-        font-size: 2vw;
+        font-size: 38px;
         font-weight: bold;
         color: white;
         font-family: 'Orbitron', sans-serif;
@@ -264,7 +265,7 @@
         text-indent: 1vw;
         font-family: 'Orbitron', sans-serif;
         font-weight: bold;
-        font-size: 0.7vw;
+        font-size: 13px;
         opacity: 0.8;
         transition: opacity 0.2s ease, color 0.2s ease;
         cursor: pointer;
@@ -363,7 +364,7 @@
         font-weight: Bolder;
         font-family: 'Orbitron', sans-serif;
         color: white;
-        font-size: 2vw;
+        font-size: 38px;
         background-color: #16171d;
         height: 7vh;
         padding-left: 2vw;
@@ -401,7 +402,7 @@
         position: absolute;
         margin-left: 17.6vw;
         margin-top: 42.4vh;
-        font-size: 5vw;
+        font-size: 96px;
         font-weight: 100;
         color: #20222b;
         cursor: pointer;
@@ -450,7 +451,7 @@
         margin-left: 33.2vw;
         margin-top: 40vh;
         color: #20222b;
-        font-size: 5vw;
+        font-size: 96px;
         font-weight: 100;
         user-select: none;
         cursor: pointer;
@@ -536,7 +537,7 @@
         position: absolute;
         margin-left: 64.5vw;
         margin-top: 39.5vh;
-        font-size: 5vw;
+        font-size: 96px;
         font-weight: 100;
         color: #20222b;
         text-align: center;
@@ -585,7 +586,7 @@
         position: absolute;
         margin-left: 80.3vw;
         margin-top: 42.4vh;
-        font-size: 5vw;
+        font-size: 96px;
         font-weight: 100;
         color: #20222b;
         text-align: center;
@@ -633,7 +634,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 2vw;
+        font-size: 38px;
         transition: margin 0.2s ease, flex 0.2s ease, transform 0.3s ease;
         cursor: pointer;
         z-index: 201;
@@ -740,7 +741,7 @@
         flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
-        font-size: 1vw;
+        font-size: 19px;
         padding-left: 0.5vw;
         display: none;
         }
@@ -951,14 +952,14 @@
         grid-column: 1/5;
         grid-row: 2;
         margin-left: 1vw;
-        font-size: 1.1vw;
+        font-size: 21px;
         text-align: center;
         }
 
         .sure {
         grid-column: 1/4;
         grid-row: 2;
-        font-size: 0.6vw;
+        font-size: 12px;
         margin-left: 6vw;
         margin-top: 6vh;
         }
@@ -1066,7 +1067,7 @@
 
         .quest1 {
         margin-left: 1vw;
-        font-size: 1.1vw;
+        font-size: 21px;
         padding: 1vw;
         margin-top: 3vh;
         text-align: center;
@@ -1208,7 +1209,7 @@
         .red{
         color:red;
         z-index:1312321312321;
-        font-size: 0.6vw;
+        font-size: 12px;
         padding-left: 0.75vw;
         align-content: center;
         }
@@ -1216,7 +1217,7 @@
         .green {
         color: green;
         z-index: 1312321312321;
-        font-size: 0.6vw;
+        font-size: 12px;
         padding-left: 0.5vw;
         align-content: center;
         }
@@ -1313,9 +1314,308 @@
         font-family: 'Orbitron', sans-serif;
         cursor:pointer;
         opacity: 0.7;
-        font-size: 0.8vw;
+        font-size: 15px;
         padding-right: 2vw;
         }
+    
+        /* ---------- Polish: dialogs, buttons, chat ---------- */
+        .box, .Confirm {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(480px, 90vw);
+        height: auto;
+        padding: 36px 28px 28px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        background-color: #16171d;
+        border: 2px solid #2f303d;
+        border-radius: 19px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 5000 !important;
+        transition: opacity 0.2s ease;
+        }
+
+        .box[style*="opacity: 1"], .Confirm[style*="opacity: 1"] {
+        pointer-events: auto;
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55), 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .box.invisible {
+        display: none;
+        }
+
+        .quest, .quest1 {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 19px;
+        text-align: center;
+        }
+
+        .sure {
+        width: 100%;
+        margin: 0;
+        font-size: 13px;
+        text-align: center;
+        opacity: 0.7;
+        }
+
+        .box .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        }
+
+        .box .form p:empty {
+        display: none;
+        }
+
+        .psw {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+        }
+
+        .box .button, .Action, .disband, .leave, .yes, .no {
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 10px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .box .button, .Action, .disband, .leave {
+        background-color: #c0392b;
+        box-shadow: 0 4px 12px rgba(192, 57, 43, 0.35);
+        }
+
+        .box .button:hover, .Action:hover, .disband:hover, .leave:hover {
+        margin-top: 0;
+        background-color: #962d22;
+        transform: translateY(-2px);
+        }
+
+        .yes {
+        background-color: rgb(62, 128, 62);
+        }
+
+        .yes:hover {
+        background-color: rgb(45, 161, 45);
+        transform: translateY(-2px);
+        }
+
+        .no {
+        background-color: #2f303d;
+        }
+
+        .no:hover {
+        background-color: #3d3f50;
+        transform: translateY(-2px);
+        }
+
+        .cancel {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        margin: 0;
+        border: none;
+        border-radius: 50%;
+        background-color: #2f303d;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        }
+
+        .cancel:hover {
+        background-color: #c0392b;
+        }
+
+        .kick1, .kick2, .kick3, .kick4, .kick5 {
+        padding: 6px 0;
+        border-radius: 8px;
+        align-items: center;
+        font-size: 12px;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .kick1:hover, .kick2:hover, .kick3:hover, .kick4:hover, .kick5:hover {
+        transform: translateY(-2px);
+        }
+
+        /* Chat / join side panel */
+        .sidebarback, .joinback {
+        border: 2px solid #2f303d;
+        border-left: none;
+        border-radius: 0 19px 19px 0;
+        }
+
+        .sidebarbuts {
+        border: 2px solid #2f303d;
+        align-items: center;
+        padding-top: 0;
+        }
+
+        .chatbut, .joinbut {
+        border-radius: 8px;
+        }
+
+        .textback, .requestbuts {
+        border-radius: 12px;
+        overflow: hidden;
+        }
+
+        .inputs .form {
+        width: 100%;
+        display: flex;
+        gap: 6px;
+        padding: 0 0.5vw;
+        }
+
+        .textinp {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 10px;
+        border-radius: 8px;
+        }
+
+        .stackup-button {
+        width: auto;
+        height: auto;
+        padding: 6px 12px;
+        border-radius: 8px;
+        }
+
+        .txtin {
+        padding: 6px 10px;
+        border-radius: 8px;
+        }
+
+        #butin {
+        width: auto;
+        height: auto;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 10px;
+        }
+    
+        .chaterror { width: 100%; margin: 0 0 6px; color: #ff5c5c; font-size: 11px; font-weight: bold; text-align: center; }
+        .chaterror:empty { display: none; }
+        .inputs { flex-wrap: wrap; }
+        /* ---------- Chat input row ---------- */
+        .inputs {
+        margin-top: 8px;
+        padding: 0 8px;
+        }
+
+        .inputs .form {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        }
+
+        .inputs .textinp {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        height: 38px;
+        margin: 0;
+        padding: 0 12px;
+        border: 2px solid #2f303d;
+        border-radius: 10px;
+        background-color: #16171d;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        outline: none;
+        }
+
+        .inputs .textinp:focus {
+        border-color: #00aaff;
+        }
+
+        .inputs .stackup-button {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        margin: 0;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+        background-color: rgb(33, 99, 175);
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+
+        .inputs .stackup-button:hover {
+        background-color: rgb(47, 144, 255);
+        }
+
+        /* ---------- Member pictures: fixed size, same center as before ---------- */
+        .ownpic1, .ownpic2, .ownpic3, .ownpic4, .ownpic5 {
+        object-fit: cover;
+        }
+
+        .ownpic1 { width: 115px; height: 115px; margin-left: calc(18.7vw - 57.5px); margin-top: calc(43.8vh + 3vw - 57.5px); }
+        .ownpic5 { width: 115px; height: 115px; margin-left: calc(81.3vw - 57.5px); margin-top: calc(43.8vh + 3vw - 57.5px); }
+        .ownpic2 { width: 120px; height: 120px; margin-left: calc(34.3vw - 60px); margin-top: calc(41vh + 3.25vw - 60px); }
+        .ownpic4 { width: 120px; height: 120px; margin-left: calc(65.65vw - 60px); margin-top: calc(41vh + 3.25vw - 60px); }
+        .ownpic3 { width: 125px; height: 125px; margin-left: calc(50vw - 62.5px); margin-top: calc(39.5vh + 3.35vw - 62.5px); }
+    
+        /* ---------- Team name: banner-style line frame ---------- */
+        .tit {
+        position: relative;
+        height: auto;
+        padding: 14px 44px;
+        box-shadow: inset 0 0 0 6px #16171d, inset 0 0 0 8px #2a2b36;
+        border-bottom: 3px solid rgb(33, 99, 175);
+        }
+
+        .tit::before, .tit::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 140px;
+        height: 2px;
+        background-color: #2a2b36;
+        }
+
+        .tit::before { right: calc(100% + 12px); }
+        .tit::after { left: calc(100% + 12px); }
     </style>
 
 
@@ -1325,7 +1625,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 
-<body>
+<body class="decor">
     <div id="grid">
 
         <div class="hotbar">
@@ -1598,6 +1898,7 @@
                 <vc:Message Lobby="0" LID="0" TID="@Convert.ToInt32(ViewData["TID"])"></vc:Message>
             </div>
             <div class="inputs">
+                <p class="chaterror">@ViewData["ChatError"]</p>
                 <form class="form" method="post" class="form" action="@Url.Action("Message","Home", new{TID = Context.Session.GetInt32("TID"), Lobby = false})" enctype="multipart/form-data">
                     <input type="text" name="Content" class="textinp">
                     <input type="submit" value=">" class="stackup-button">

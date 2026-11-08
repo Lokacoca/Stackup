@@ -1,0 +1,59 @@
+/* Corner plates for Profile, ViewTeam and Lobbies, styled after the player banners in ViewTeam
+   (banner122.png): solid plate, blue edge line, inset outline with a gap, connector lines into a
+   circle, and the bracket motif. Opt in with <body class="decor">. Left = body::before/::after,
+   right = html::before/::after (outline behind, fill on top). */
+
+:root:has(body.decor)::before,
+:root:has(body.decor)::after,
+body.decor::before,
+body.decor::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Blue edge line: same shape, nudged 4px outward, sitting behind the fill */
+body.decor::before,
+:root:has(body.decor)::before {
+    width: 646px;
+    height: 204px;
+    background-color: rgb(33, 99, 175);
+}
+
+/* Fill: solid plate with the banner-style line art */
+body.decor::after,
+:root:has(body.decor)::after {
+    width: 640px;
+    height: 200px;
+    background-color: #16171d;
+    background-size: 640px 200px;
+    background-repeat: no-repeat;
+}
+
+body.decor::before {
+    left: 0;
+    clip-path: polygon(0 calc(100% - 204px), 142px calc(100% - 204px), 222px calc(100% - 124px), 522px calc(100% - 124px), 646px 100%, 0 100%);
+}
+
+body.decor::after {
+    left: 0;
+    clip-path: polygon(0 calc(100% - 200px), 140px calc(100% - 200px), 220px calc(100% - 120px), 520px calc(100% - 120px), 640px 100%, 0 100%);
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='200'%3E%3Cg fill='none' stroke='%232a2b36' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M14 200V14H52M88 14H134L214 94H514L620 200'/%3E%3Ccircle cx='70' cy='120' r='34'/%3E%3Cpath d='M14 66L46 96M94 96L155 35M46 144L14 176M94 144L120 170'/%3E%3Cpath d='M356 130H350L338 147L350 164H356M364 130H370L382 147L370 164H364'/%3E%3C/g%3E%3C/svg%3E");
+    background-position: left bottom;
+}
+
+:root:has(body.decor)::before {
+    right: 0;
+    clip-path: polygon(100% calc(100% - 204px), calc(100% - 142px) calc(100% - 204px), calc(100% - 222px) calc(100% - 124px), calc(100% - 522px) calc(100% - 124px), calc(100% - 646px) 100%, 100% 100%);
+}
+
+:root:has(body.decor)::after {
+    right: 0;
+    clip-path: polygon(100% calc(100% - 200px), calc(100% - 140px) calc(100% - 200px), calc(100% - 220px) calc(100% - 120px), calc(100% - 520px) calc(100% - 120px), calc(100% - 640px) 100%, 100% 100%);
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='200'%3E%3Cg transform='translate%28640 0%29 scale%28-1 1%29'%3E%3Cg fill='none' stroke='%232a2b36' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M14 200V14H52M88 14H134L214 94H514L620 200'/%3E%3Ccircle cx='70' cy='120' r='34'/%3E%3Cpath d='M14 66L46 96M94 96L155 35M46 144L14 176M94 144L120 170'/%3E%3Cpath d='M356 130H350L338 147L350 164H356M364 130H370L382 147L370 164H364'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-position: right bottom;
+}

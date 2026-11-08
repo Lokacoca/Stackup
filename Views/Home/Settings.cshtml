@@ -1,56 +1,49 @@
 ﻿<head>
+    <link rel="stylesheet" href="~/css/stackup.css" />
+    <link rel="stylesheet" href="~/css/form.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
-        input {
-        width: 100%;
-        max-width: 30vw;
-        width: 30vw;
-        padding: 14px 18px;
-        font-size: 16px;
-        font-family: 'Orbitron', sans-serif;
-        color: #10283f;
-        background: #ffffff;
-        border: 3px solid #112d4e;
-        border-radius: 8px;
-        outline: none;
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 0 10px rgba(17, 45, 78, 0.5);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-        }
-
+        .page { flex-direction: column; gap: 32px; padding: 60px 5vw; }
+        .inback { width: 100%; }
+        .back { color: grey; font-size: 13px; align-self: flex-start; }
+        .back:hover { color: white; }
+        .form label { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #c9cad3; }
+        .green { color: limegreen; text-align: center; }
+        .red { text-align: center; }
+        .red:empty, .green:empty { display: none; }
     </style>
-
 </head>
-
 
 @model System.Data.DataTable
 
+<main class="page">
+    <div class="inback">
+        <a class="back" href="@Url.Action("Index", "Home")">&larr; Back</a>
+        <p class="tit">Settings</p>
+        <form class="form" method="post" action="@Url.Action("Edit", "Home", new{UID = Context.Session.GetInt32("UID")})" enctype="multipart/form-data">
+            <label>Username <input class="input" type="text" name="UserName" value="@Model.Rows[0]["UserName"]" /></label>
+            <label>Tagline <input class="input" type="text" name="Tagline" value="@Model.Rows[0]["tagline"]" /></label>
+            <input type="hidden" name="Picture" value="@Model.Rows[0]["Picture"]" />
+            <label>Password <input class="input" type="password" name="Password" value="@Model.Rows[0]["Password"]" /></label>
+            <label>Profile Picture <input class="input" type="file" id="file" name="file" /></label>
+            <input class="button" id="button1" type="submit" value="Apply Changes" />
+            <p class="red">@ViewData["ben"]</p>
+            <p class="green">@ViewData["ben2"]</p>
+        </form>
+    </div>
 
-
-<form class="form" method="post" action="@Url.Action("Edit", "Home", new{UID = Context.Session.GetInt32("UID")})" enctype="multipart/form-data">
-    Username: <input class="input" type="text" name="UserName" value="@Model.Rows[0]["UserName"]" /><br />
-    TagLine: <input class="input" type="text" name="Tagline" value="@Model.Rows[0]["tagline"]" /><br />
-    <input class="input" type="hidden" name="Picture" value="@Model.Rows[0]["Picture"]" />
-
-    Password: <input class="input" type="password" name="Password" value="@Model.Rows[0]["Password"]" /><br />
-    Profile Picture: <input class="input" type="file" id="file" name="file" />
-    <input class="button" type="submit" value="Apply Changes" /><br />
-    <p class="red">@ViewData["ben"]</p>
-    <p class="green">@ViewData["ben2"]</p>
-
-</form>
-
-
-@if(Convert.ToInt32(ViewData["Check"]) == 1)
-{
-    <form class="form" method="post" action="@Url.Action("TeamEdit", "Home", new{TID =  Context.Session.GetInt32("TID")})" enctype="multipart/form-data">
-        Team Name: <input class="input" type="text" name="Name" value="@Model.Rows[0]["TeamName"]" /><br />
-        Description: <input class="input" type="text" name="Desc" value="@Model.Rows[0]["TeamDesc"]" /><br />
-        Logo: <input class="input" type="file" id="file" name="file" />
-        <input class="button" type="submit" value="Apply Changes" /><br />
-    </form>
-    <p class="red">@ViewData["team1"]</p>
-    <p class="green">@ViewData["team2"]</p>
-}
+    @if (Convert.ToInt32(ViewData["Check"]) == 1)
+    {
+        <div class="inback">
+            <p class="tit">Team</p>
+            <form class="form" method="post" action="@Url.Action("TeamEdit", "Home", new{TID = Context.Session.GetInt32("TID")})" enctype="multipart/form-data">
+                <label>Team Name <input class="input" type="text" name="Name" value="@Model.Rows[0]["TeamName"]" /></label>
+                <label>Description <input class="input" type="text" name="Desc" value="@Model.Rows[0]["TeamDesc"]" /></label>
+                <label>Logo <input class="input" type="file" name="file" /></label>
+                <input class="button" id="button1" type="submit" value="Apply Changes" />
+                <p class="red">@ViewData["team1"]</p>
+                <p class="green">@ViewData["team2"]</p>
+            </form>
+        </div>
+    }
+</main>

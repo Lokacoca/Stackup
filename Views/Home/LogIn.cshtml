@@ -1,616 +1,70 @@
 ﻿
 <head>
-<style>
-    * {
-           margin: 0;
-           padding: 0;
-           box-sizing: border-box;
-           overflow-x: hidden;
-           overflow-y: hidden;
-       }
-
-
-       #grid {
-           height: 100vh;
-           width: 100vw;
-           display: grid;
-           grid-template-columns: repeat(20, 5vw);
-           grid-template-rows: repeat(20, 5vh);
-          
-       }
-
-       .blank{
-           grid-column:1/21;
-           grid-row:1/14;
-           background-color: black;
-           opacity:30%;
-       }
-
-
-
-       .button.Sign {
-           color: white;
-           text-align: center;
-       }
-
-     .hotbar {
-         grid-row:1/3;
-         grid-column:1/21;
-           background-color: #16171d;
-         z-index: 1000;
-         box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
-     }
-
-     #hotbaritems {
-           grid-row: 1/3;
-           z-index: 100000;
-           display: flex;
-           justify-content:flex-start;
-           align-items: center;
-           width: 50vw;
-           margin-left:3vw;
-           height: 10vh;
-           font-size: 1vw;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: bolder;
-           color: white;
-           cursor: pointer;
-     }
-
-     #hotbaritems > * {
-   max-height: 100%;
-   max-width: 100%;
-   overflow: hidden;
-}
-
-     #hotbarlogs {
-           margin-top: -10vh;
-           margin-left: 47vw;
-           z-index: 1000001;
-           display: flex;
-           justify-content:flex-end;
-           align-items: center;
-           width: 50vw;
-           height: 10vh;
-           font-size: 1vw;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: bolder;
-           color: white;
-     }
-
-     #video {
-         z-index:-1;
-           grid-column: 1/21;
-           grid-row: 1/16;
-           margin-top:-50vh;
-           pointer-events: none;
-         
-     }
-
-       .gradient-box {
-           z-index:10;
-           grid-column:1/21;
-           grid-row:3/14;
-           width: 100%;
-           height: 100%; 
-           background: linear-gradient(to top, black, transparent);
-           pointer-events: none; 
-       }
-
-
-       .lowerblank {
-           z-index: -100;
-           grid-column: 1/21;
-           grid-row: 14/21;
-           background-color:black;
-       }
-
-       .climb {
-           color: white;
-           font-size: 3vw;
-           grid-column: 1/21;
-           grid-row: 4/7;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           z-index: 998;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: bolder;
-       }
-
-       .climb2 {
-           color: white;
-           font-size: 1.5vw;
-           grid-column: 6/16;
-           grid-row: 6/9;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           z-index: 1000;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: 300;
-           text-align: center;
-       }
-
-       .signupbut {
-           grid-column: 1/21;
-           grid-row: 9/11;
-           background-color:rgb(47, 144, 255);
-           color:white;
-           border-radius: 1vw;
-           width:8vw;
-           height: 6vh;
-           z-index: 10001;
-           display: flex;
-           justify-self: center;
-           align-self: center;
-           justify-content: center;
-           align-items: center;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: 800;
-           font-size: 1vw;
-           transition: transform 0.2s ease, background-color 0.2s ease, font-weight 0.2s ease;
-       }
-
-       .signupbut:hover {
-           background-color: rgb(25, 71, 124);
-           color: black;
-           font-weight: bolder;
-           transform: scale(1.05);
-       }
-
-       #logo{
-           opacity: 0.8;
-           transition: transform 0.2s ease, opacity 0.2s ease;
-       }
-
-       #logo:hover {
-           opacity: 1;
-           transform: scale(1.05);
-       }
-       .logotitle {
-           transition: transform 0.2s ease;
-       }
-
-       #logo:hover + .logotitle  {
-           transform: translateX(0.5vw);
-       }
-
-       .aa {
-           color: rgb(47, 144, 255);
-       }
-
-       .hotbarbuttons{
-           margin-left: 1.5vw;
-           opacity: 0.7;
-           font-size: 0.8vw;
-           transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
-           cursor: pointer;
-           
-       }
-      
-       .hotbarbuttons:hover{
-           opacity: 1;
-           transform: scale(1.05);
-           color: rgb(47, 144, 255);
-       }
-
-       .counters {
-           grid-row: 17;
-           grid-column: 1/21;
-           font-size: 2vw;
-           font-weight: bold;
-           color: white;
-           font-family: 'Orbitron', sans-serif;
-           display: flex;
-           justify-content: space-evenly;
-
-       }
-
-       #blue{
-           color: rgb(47, 144, 255);
-       }
-       
-
-       #Profilepic {
-           border-radius: 50%;
-           background-color: #1c1e25;
-           justify-self: center;
-           cursor: pointer;
-       }
-
-       .popdown {
-           grid-column: 18/21;
-           grid-row: 6/10;
-           background-color: #16171d;
-           z-index: 999;
-           display: flex;
-           flex-direction: column-reverse;
-           justify-content:center;
-           gap:1vh;
-           border-top: solid rgb(61, 61, 61) 2px;
-           transform: translateY(-35vh);
-           transition: transform 0.5s ease-out;
-       }
-
-       .popdown.clicked {
-           transform: translateY(0);
-       }
-
-       .topsec {
-           grid-column: 18/21;
-           grid-row:3/6;
-           background-color: #16171d;
-           z-index: 999;
-           transform: translateY(-35vh);
-           transition: transform 0.5s ease-out;
-       }
-
-       .topsec.clicked {
-       transform: translateY(0);
-   }
-
-       .popdownbuttons {
-           color: white;
-           width: 15vw;
-           height: 4vh;
-           border-radius: 0.5vw;
-           display: flex;
-           align-items: center;
-           text-indent: 1vw;
-           font-family: 'Orbitron', sans-serif;
-           font-weight: bold;
-           font-size: 0.7vw;
-           opacity: 0.8;
-           transition: opacity 0.2s ease, color 0.2s ease;
-           cursor: pointer;
-           text-decoration: none;
-       }
-
-       .popdownbuttons:hover {
-           color:rgb(47, 144, 255);
-           background-color:#1c1e25;
-           opacity: 1;
-       }
-
-       a {
-   text-decoration: none; 
-   color: white; 
-   font-family: 'Orbitron', sans-serif;
-   font-weight: bold;
-}
-
-p{
-   text-decoration: none; 
-   color: white; 
-   font-family: 'Orbitron', sans-serif;
-   font-weight: bold;
-}
-
-   .popdownicon {
-       height: 1.5vw;
-       width: 1.5vw;
-       margin-left: 0.5vw;
-   }
-
-   .topsecsecond {
-       height: 4vh;
-       width: 13vw;
-       background-color:  #1c1e25;
-       color: white;
-       display: flex;
-       align-items: center;
-       font-family: 'Orbitron', sans-serif;
-       font-weight: bold;
-       justify-self: center;
-       margin-top: 3vh;
-       gap:1vw;
-   }
-
-   .topsecfirst {
-       display: flex;
-       justify-content: flex-start;
-       align-items: center;
-       gap:0.1vw;
-       margin-left: 1vw;
-       margin-top: 1vh;
-       
-   }
-
-
-   .back {
-       grid-row: 1/21;
-       grid-column: 1/21;
-       z-index: -100000;
-       background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
-   }
-
-   .form {
-    grid-column: 1/21;
-    grid-row: 1/21;
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: flex-start;
-    gap:2vh;
-   }
-
-   input {
-    width: 100%;
-    max-width: 30vw;
-    width: 30vw;
-    padding: 14px 18px;
-    font-size: 16px;
-    font-family: 'Orbitron', sans-serif;
-    color: #10283f; 
-    background: #ffffff; 
-    border: 3px solid #112d4e; 
-    border-radius: 8px;
-    outline: none;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 10px rgba(17, 45, 78, 0.5); 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-}
-
-
-input:hover {
-    border-color: #3a7ca5; 
-    box-shadow: 0 0 15px rgba(58, 124, 165, 0.8);
-}
-
-
-input:focus {
-    border-color: #00aaff;
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.8);
-}
-
-
-input:disabled {
-    background: #e0e0e0;
-    color: #666;
-    border-color: #aaa;
-    cursor: not-allowed;
-}
-
-.tit {
-    grid-column: 1/21;
-    grid-row: 6/8;
-    justify-self: center;
-    align-self: center;
-    font-weight: Bolder;
-    font-family: 'Orbitron', sans-serif;
-    color: white;
-}
-
-#button1{
-    background-color: #1e4c81;
-    border: none;
-    color: white;
-    width: 10vw;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-}
-
-#button1:hover{
-    background-color: #1a4270;
-    border:none;
-    box-shadow: none;
-}
-
-#button1:focus {
-    border:none;
-    box-shadow: none;
-}
-
-.agent3{
-        grid-column: 1/12;
-        grid-row: 4/21;
-        opacity: 0.4;
-        display: flex;
-        justify-self: center;
-        z-index: -10;
-        animation: slideleft 1s ease-in-out;
-    }
-
-    .agent{
-        grid-column: 9/21;
-        grid-row: 4/21;
-        opacity: 0.4;
-        display: flex;
-        justify-self: center;
-        z-index: -10;
-        animation: moveToZero 2.5s ease-in-out;
-    }
-
-    @@keyframes slideleft {
-  from {
-    transform: translateX(-50vw);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.red {
-            color: red;
-            font-weight: bold;
-            font-size: 1.2rem;
-            animation: shake 0.5s ease-in-out;
-}
-
-        @@keyframes shake {
-            0%, 100%
-
-        {
-            transform: translateX(0);
-        }
-
-        10%, 90% {
-            transform: translateX(-10px);
-        }
-
-        20%, 80% {
-            transform: translateX(10px);
-        }
-
-        30%, 50%, 70% {
-            transform: translateX(-8px);
-        }
-
-        40%, 60% {
-            transform: translateX(8px);
-        }
-
-        }
-
-        .searchicon {
-            grid-column: 14/16;
-            grid-row: 1/3;
-            display: flex;
-            align-self: center;
-            height: 1.5vw;
-            width: 1.5vw;
-            justify-self: center;
-            z-index: 1000001;
-            opacity: 0.6;
-        }
-
-        #searchInput {
-            height: 5vh;
-            width: 17.5vw;
-            display: flex;
-            justify-self: center;
-            align-self: center;
-            color: white;
-            background-color: #22232c;
-            border: none;
-            text-indent: 2.3vw;
-            border-radius: 1vw;
-            font-family: system-ui, sans-serif;
-        }
-
-            #searchInput:focus {
-                outline: none;
-            }
-
-        .Search {
-            grid-column: 14/19;
-            grid-row: 1/3;
-            z-index: 100000;
-        }
-
-        .Sigma {
-            grid-column: 14/19;
-            grid-row: 1/3;
-            display: flex;
-            justify-self: center;
-            align-self: center;
-            z-index: 100000;
-        }
-
-        .Results {
-            grid-area: 3/7/8/13;
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            z-index: 31321231;
-            background-color: white;
-        }
-
-        .inback {
-            grid-column: 7/15;
-            grid-row: 5/15;
-            z-index: -1;
-            background-color: #22232c;
-            border-radius: 3vw;
-            width: 37vw;
-            height: 45vh;
-            display: flex;
-            justify-self: center;
-            align-self: flex-end;
-        }
-
-</style>
-
-
+<link rel="stylesheet" href="~/css/stackup.css" />
+<link rel="stylesheet" href="~/css/form.css" />
 
 </head>
 @model System.Data.DataTable
 @{
     Random rnd = new Random();
     int left2 = rnd.Next(5, 9);
-} 
+}
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 
-<body> 
-   <div id="grid">
-
-       <div class="hotbar">
-           <div id="hotbaritems">
-                <a href="@Url.Action("Index", "Home" )" id="logo">
-                    <img src="~/Bilder/stackuplogo.png" href="@Url.Action("Index", "Home" )" width="75" height="75" id="logo">
-                </a>
-                <div class="logotitle">Stack | <span class="aa">Up</span></div>
-               
-                <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
-
-           </div>
-           <div id="hotbarlogs">
-               <a class="button Sign" href="@Url.Action("Create", "Home")">Sign Up</a>
-           </div>
-       </div>
-
-<div class="back"></div>
-
-<h1 class="tit">Log In</h1>
-
-        <form class="form" method="post" action="@Url.Action("LogIn_Check","Home")">
-    <input id="button1" type="submit" value="Log In" />
-    <div>
-        <p>Password</p>
-                <input class="input" type="password" name="Password" value="@ViewData["2"]" /><br />
-                @if (ViewData["text"] != null)
-                {
-                    <p class="red">@ViewData["text"]</p>
-                }
-                @if (ViewData["text1"] != null)
-                {
-                    <p class="red">@ViewData["text1"]</p>
-                }
-</div>
-<div>
-    <p>Tagline</p>
-                <input class="input" id="hashtagInput" type="text" name="tagline" value="@ViewData["3"]" />
-</div>
-<div>
-    <p>Username</p>
-                <input class="input" type="text" name="Username" value="@ViewData["1"]" />
-</div>
-</form>
-
-<img src="~/Bilder/@($"{left2}.png")" alt="" class="agent3">
+<body>
+    <div class="hotbar">
+        <div id="hotbaritems">
+            <a href="@Url.Action("Index", "Home" )" id="logo">
+                <img src="~/Bilder/stackuplogo.png" width="75" height="75">
+            </a>
+            <div class="logotitle">Stack | <span class="aa">Up</span></div>
+            <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+        </div>
 
         <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
+            <img class="searchicon" src="~/Bilder/searchicon.png">
             <input class="Search" name="input" type="text" id="searchInput" placeholder="Search Players" />
         </form>
-        <img class="searchicon" src="~/Bilder/searchicon.png">
 
-        <div class="inback"></div>
+        <div id="hotbarlogs">
+            <a class="Sign" href="@Url.Action("Create", "Home")">Sign Up</a>
+        </div>
+    </div>
 
-</div>
+    <main class="page">
+        <img src="~/Bilder/@($"{left2}.png")" alt="" class="agent3">
+
+        <div class="inback">
+            <h1 class="tit">Log In</h1>
+
+            <form class="form" method="post" action="@Url.Action("LogIn_Check","Home")">
+                <div>
+                    <p>Username</p>
+                    <input class="input" type="text" name="Username" value="@ViewData["1"]" />
+                </div>
+                <div>
+                    <p>Tagline</p>
+                    <input class="input" id="hashtagInput" type="text" name="tagline" value="@ViewData["3"]" />
+                </div>
+                <div>
+                    <p>Password</p>
+                    <input class="input" type="password" name="Password" value="@ViewData["2"]" />
+                    @if (ViewData["text"] != null)
+                    {
+                        <p class="red">@ViewData["text"]</p>
+                    }
+                    @if (ViewData["text1"] != null)
+                    {
+                        <p class="red">@ViewData["text1"]</p>
+                    }
+                </div>
+                <input id="button1" type="submit" value="Log In" />
+            </form>
+        </div>
+    </main>
+
    <script>
-            const inputField = document.querySelector("#hashtagInput");
-
         document.addEventListener("DOMContentLoaded", function () {
             const inputField = document.querySelector("#hashtagInput");
 

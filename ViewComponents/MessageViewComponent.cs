@@ -44,7 +44,7 @@ namespace Stackup.ViewComponents
                 sqlConn.Open();
                 if(Lobby == 1)
                 {
-                    string query = "SELECT m.Content,u.UserName,u.tagline,t.Name,u.TID,u.Picture FROM MessageTable m INNER JOIN UserTable u ON m.UID = u.UID INNER JOIN TeamTable t ON u.TID = t.TID WHERE m.LID = @LID ORDER BY m.MID";
+                    string query = "SELECT m.UID,m.Content,u.UserName,u.tagline,t.Name,u.TID,u.Picture FROM MessageTable m INNER JOIN UserTable u ON m.UID = u.UID INNER JOIN TeamTable t ON u.TID = t.TID WHERE m.LID = @LID ORDER BY m.MID";
                     SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlConn);
                     sqlDa.SelectCommand.Parameters.AddWithValue("@LID", LID);
                     sqlDa.Fill(localTbl);
