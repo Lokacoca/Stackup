@@ -1,0 +1,124 @@
+/* Shared form-card layout: Log In, Sign Up, Create Team. */
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
+}
+
+.Sign {
+    font-size: 19px;
+}
+
+.page {
+    position: relative;
+    min-height: calc(100vh - 100px);
+    padding: 60px 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agent3 {
+    position: absolute;
+    left: 18vw;
+    bottom: 0;
+    height: calc(100% - 40px);
+    max-height: 980px;
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+    animation: slideleft 1s ease-in-out;
+}
+
+.inback {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 710px;
+    padding: 40px 6vw 48px;
+    background-color: #22232c;
+    border-radius: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.tit {
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form p {
+    margin-bottom: 4px;
+}
+
+.input, #button1 {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+    color: #10283f;
+    background: #ffffff;
+    border: 3px solid #112d4e;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(17, 45, 78, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.input:hover {
+    border-color: #3a7ca5;
+    box-shadow: 0 0 15px rgba(58, 124, 165, 0.8);
+}
+
+.input:focus {
+    border-color: #00aaff;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.8);
+}
+
+#button1 {
+    width: auto;
+    align-self: flex-start;
+    padding: 14px 60px;
+    background-color: #1e4c81;
+    border: none;
+    color: white;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#button1:hover {
+    background-color: #1a4270;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 8px;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes slideleft {
+    from { transform: translateX(-50vw); }
+    to { transform: translateX(0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 90% { transform: translateX(-10px); }
+    20%, 80% { transform: translateX(10px); }
+    30%, 50%, 70% { transform: translateX(-8px); }
+    40%, 60% { transform: translateX(8px); }
+}

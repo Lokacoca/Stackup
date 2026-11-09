@@ -1,125 +1,488 @@
 ﻿<head>
+    <link rel="stylesheet" href="~/css/stackup.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
-        .team1 {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 20px;
-        border: solid 0.13em #4C4E52;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        z-index: 10000;
-        height: 65vh;
-        width: 25vw;
-        overflow: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        body {
+        min-height: 100vh;
+        background-color: #16171d;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         }
 
-        .team2 {
-        margin-left: 50vw;
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        justify-content: flex-start;
+        /* Team boxes hug the left/right edges; the middle column runs to the bottom of the screen */
+        .arena {
+        width: 100%;
+        height: calc(100vh - 100px);
+        min-height: 640px;
+        padding: 32px 32px 0;
+        display: grid;
+        grid-template-columns: minmax(380px, 30vw) minmax(0, 1fr) minmax(380px, 30vw);
+        gap: 32px;
         align-items: center;
+        }
+
+        /* ---------- Team boxes ---------- */
+        .teambox {
         padding: 20px;
-        border: solid 0.13em #4C4E52;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        z-index: 10000;
-        height: 65vh;
-        width: 25vw;
-        overflow: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        background-color: rgba(22, 23, 29, 0.94);
+        border: 2px solid #2f303d;
+        border-radius: 19px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .teamhead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 16px;
+        margin-bottom: 14px;
+        border-bottom: 3px solid rgb(33, 99, 175);
+        }
+
+        .teamhead img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: #22232c;
+        }
+
+        .teamname {
+        font-size: 22px;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        }
+
+        .teamrole {
+        font-size: 11px;
+        color: grey;
+        }
+
+        .slots {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        }
+
+        /* Bottom group: the leader button sits right on top of the chat, which touches the screen edge */
+        .center:has(.chatpanel) .lobbyaction {
+        margin-top: auto;
+        }
+
+        .center:not(:has(.lobbyaction)) .chatpanel {
+        margin-top: auto;
+        }
+
+        /* Player banners: inset frame, chamfer ticks in two corners and the bracket motif from the team banners */
+        .slot {
+        min-height: 124px;
+        padding: 14px 20px;
+        box-shadow: inset 0 0 0 6px #22232c, inset 0 0 0 7px #2f303d;
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='30'%3E%3Cpath d='M18 3H12L4 15L12 27H18M26 3H32L40 15L32 27H26' fill='none' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 15L15 1' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 15L15 1' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 72px center, left 6px top 6px, right 6px bottom 6px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background-color: #22232c;
+        border: 1px solid #2f303d;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        }
+
+        a.slot:hover {
+        background-color: #2a2b36;
+        box-shadow: inset 0 0 0 6px #2a2b36, inset 0 0 0 7px #3a3c4c;
+        }
+
+        .slot .pfp {
+        width: 56px;
+        height: 56px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: #16171d;
+        }
+
+        .slot .who {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: bold;
+        }
+
+        .slot .tagline {
+        color: grey;
+        font-weight: 100;
+        font-size: 12px;
+        opacity: 0.7;
+        }
+
+        .captain {
+        margin-left: 8px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background-color: #2f303d;
+        color: #a9aab5;
+        font-size: 10px;
+        font-weight: bold;
+        vertical-align: middle;
+        }
+
+        .slot .rankimg {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        }
+
+        .slot.empty {
+        justify-content: center;
+        box-shadow: none;
+        background-image: none;
+        background-color: transparent;
+        border: 1px dashed #2f303d;
+        color: grey;
+        font-size: 12px;
+        }
+
+        /* ---------- Center column ---------- */
+        .center {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding-top: 24px;
+        }
+
+        .vs {
+        font-size: 64px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .lobbyaction {
+        padding: 10px 22px;
+        border-radius: 10px;
+        background-color: #c0392b;
+        box-shadow: 0 4px 12px rgba(192, 57, 43, 0.35);
+        color: white;
+        font-size: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .lobbyaction:hover {
+        background-color: #962d22;
+        transform: translateY(-2px);
+        }
+
+        .waiting {
+        color: #a9aab5;
+        font-size: 13px;
+        text-align: center;
+        }
+
+        /* ---------- Chat panel (same look as the team chat) ---------- */
+        /* Always open: from about halfway down to the bottom edge of the screen */
+        .chatpanel {
+        width: 100%;
+        max-width: 640px;
+        height: 50vh;
+        padding: 12px 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: #1c1d25;
+        border: 2px solid #2f303d;
+        border-bottom: none;
+        border-radius: 19px 19px 0 0;
+        }
+
+        .chatpanel .flow {
+        height: 100%;
+        }
+
+        .textback {
+        flex: 1;
+        min-height: 0;
+        padding: 0 8px;
+        border: 2px solid #2f303d;
+        border-radius: 12px;
+        background-color: #16171d;
+        overflow: hidden;
+        }
+
+        .chaterror {
+        color: #ff5c5c;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+        }
+
+        .chaterror:empty {
+        display: none;
+        }
+
+        .inputs .form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        }
+
+        .textinp {
+        flex: 1;
+        min-width: 0;
+        height: 38px;
+        padding: 0 12px;
+        border: 2px solid #2f303d;
+        border-radius: 10px;
+        background-color: #16171d;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        outline: none;
+        }
+
+        .textinp:focus {
+        border-color: #00aaff;
+        }
+
+        .stackup-button {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 10px;
+        background-color: rgb(33, 99, 175);
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+
+        .stackup-button:hover {
+        background-color: rgb(47, 144, 255);
         }
     </style>
-
 </head>
 @model System.Data.DataTable
-<div class="team1">
-
-    @for (int i = 0; i < 5; i++)
+@{
+    var host = Model;
+    var enemy = (System.Data.DataTable)ViewData["Enemy"];
+    bool history = Convert.ToInt32(ViewData["NO"]) == 1;
+    bool active = Convert.ToInt32(ViewData["Active"]) == 0;
+    int me = Convert.ToInt32(Context.Session.GetInt32("UID"));
+    bool inLobby = false;
+    foreach (System.Data.DataRow r in host.Rows) { if (Convert.ToInt32(r["UID"]) == me) inLobby = true; }
+    foreach (System.Data.DataRow r in enemy.Rows) { if (Convert.ToInt32(r["UID"]) == me) inLobby = true; }
+    bool isHostLeader = me == Convert.ToInt32(ViewData["CreateLeader"]);
+    bool isEnemyLeader = me == Convert.ToInt32(ViewData["JoinLeader"]);
+    var user = (System.Data.DataTable)ViewData["Me"];
+}
+@functions {
+    // One team box: up to 5 players (captain first, from the controller), empty slots fill the rest.
+    void TeamBox(System.Data.DataTable team, string role, string emptyText)
     {
-        <div class="Create">
-            <a href="@Url.Action("Profile", "Home", new{ UID = Model.Rows[i]["UID"]})">@Model.Rows[i]["UserName"]<span>@Model.Rows[i]["Tagline"]</span></a>
-
-        </div>
-    }
-
-</div>
-
-<div class="team2">
-    @if(Convert.ToInt32(ViewData["Active"]) == 0)
-    {
-        @for (int i = 5; i < 10; i++)
-        {
-            <div class="Join">
-                <p>@Model.Rows[i]["UserName"]</p>
-                <p>@Model.Rows[i]["Tagline"]</p>
-
-
+        <section class="teambox">
+            <div class="teamhead">
+                @if (team.Rows.Count > 0)
+                {
+                    <img src="@Url.Content("~/Bilder/" + team.Rows[0]["TeamPicture"])" alt="">
+                    <div>
+                        <div class="teamname">@team.Rows[0]["TeamName"]</div>
+                        <div class="teamrole">@role</div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <div class="teamname">Waiting for opponent</div>
+                        <div class="teamrole">@role</div>
+                    </div>
+                }
             </div>
-        }
-    }
-    else
-    {
-        <div class="Join">
-            <p>To be Found...</p>
-        </div>
-        <div class="Join">
-            <p>To be Found...</p>
-        </div>
-        <div class="Join">
-            <p>To be Found...</p>
-        </div>
-        <div class="Join">
-            <p>To be Found...</p>
-        </div>
-        <div class="Join">
-            <p>To be Found...</p>
-        </div>
-    }
-
-
-</div>
-@if (Convert.ToInt32(ViewData["Active"]) == 0 && Convert.ToInt32(ViewData["NO"]) != 1)
-{
-    <vc:Message Lobby="1" LID="@Convert.ToInt32(ViewData["LID"])" TID="0"></vc:Message>
-
-    @for (int i = 0; i < Model.Rows.Count; i++)
-    {
-        if(Context.Session.GetInt32("UID") == Convert.ToInt32(Model.Rows[i]["UID"]))
-        {
-            <div class="inputs">
-                <form class="form" method="post" class="form" action="@Url.Action("Message","Home", new{lID = Convert.ToInt32(ViewData["LID"]), Lobby = true})" enctype="multipart/form-data">
-                    <input type="text" name="Content" class="textinp">
-                    <input type="submit" value=">" class="stackup-button">
-                </form>
-
+            <div class="slots">
+                @for (int i = 0; i < 5; i++)
+                {
+                    if (i < team.Rows.Count)
+                    {
+                        <a class="slot" href="@Url.Action("Profile", "Home", new { UID = team.Rows[i]["UID"] })">
+                            <img class="pfp" src="@Url.Content("~/Bilder/" + team.Rows[i]["Picture"])" alt="">
+                            <span class="who">
+                                @team.Rows[i]["UserName"]<span class="tagline">@team.Rows[i]["tagline"]</span>
+                                @if (Convert.ToInt32(team.Rows[i]["IsLeader"]) == 1)
+                                {
+                                    <span class="captain">[Captain]</span>
+                                }
+                            </span>
+                            <img class="rankimg" src="@Url.Content("~/Bilder/" + team.Rows[i]["rank"])" alt="">
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="slot empty">@emptyText</div>
+                    }
+                }
             </div>
-        }
+        </section>
     }
-
-
-  
-
-
 }
 
-@if (Convert.ToInt32(ViewData["NO"]) != 1)
-{
-    @if (Convert.ToInt32(Context.Session.GetInt32("UID")) == Convert.ToInt32(ViewData["CreateLeader"]))
+<body style="background-image: linear-gradient(rgba(10, 11, 15, 0.55), rgba(10, 11, 15, 0.75)), url('@Url.Content("~/Bilder/" + ViewData["Map"])');">
+    <div class="hotbar">
+        <div id="hotbaritems">
+            <a href="@Url.Action("Index", "Home")" id="logo">
+                <img src="~/Bilder/stackuplogo.png" width="75" height="75">
+            </a>
+            <div class="logotitle">Stack | <span class="aa">Up</span></div>
+            <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+        </div>
+
+        <div id="hotbarlogs">
+            @if (Context.Session.GetString("_InloggStatus") != "yes")
+            {
+                <a class="hotbarbuttons" href="@Url.Action("Create", "Home")">Sign Up</a>
+                <a href="@Url.Action("LogIn", "Home")" class="hotbarbuttons">Log in</a>
+            }
+            else
+            {
+                <button class="hotbarbuttons inbox">Inbox</button>
+                <img src="~/Bilder/@user.Rows[0]["Picture"]" width="60" height="60" id="Profilepic" class="hotprof">
+            }
+        </div>
+    </div>
+
+    @if (Context.Session.GetString("_InloggStatus") == "yes")
     {
-        <a href="@Url.Action("StopLobby", "Home")">Close Lobby</a>
-    }
-    @if (Convert.ToInt32(Context.Session.GetInt32("UID")) == Convert.ToInt32(ViewData["JoinLeader"]))
-    {
-        <a href="@Url.Action("LeaveLobby", "Home")">Leave Lobby</a>
+        <div class="box"><vc:requests></vc:requests></div>
+
+        <div class="topsec">
+            <div class="topsecfirst">
+                <img src="~/Bilder/@user.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
+                <p>@user.Rows[0]["Username"]<span class="tag">@user.Rows[0]["tagline"]</span></p>
+            </div>
+            <div class="topsecsecond">
+                <img src="~/Bilder/Elo.png" alt="" class="popdownicon">
+                <div>@user.Rows[0]["rank"]</div>
+            </div>
+        </div>
+
+        <div class="popdown">
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("LogOut", "Home")">LogOut</a>
+            </div>
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
+                <a href="Settings">Settings</a>
+            </div>
+            @if(Convert.ToInt32(user.Rows[0]["TID"]) == 0)
+            {
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <form method="post" action="@Url.Action("Search","Home")">
+                        <input name="input" type="hidden" value="" />
+                        <input class="Ninja" type="submit" value="Join Team"/>
+                    </form>
+                </div>
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
+                </div>
+            }
+            else
+            {
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
+                </div>
+            }
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">Profile</a>
+            </div>
+        </div>
     }
 
-}
+    <main class="arena">
+        @{ TeamBox(enemy, "Challenger", active ? "Empty slot" : "To be found..."); }
+
+        <div class="center">
+            <div class="vs">VS</div>
+
+            @if (!history)
+            {
+                @if (!active)
+                {
+                    <p class="waiting">Waiting for a team to join...</p>
+                }
+
+                @if (isHostLeader)
+                {
+                    <a class="lobbyaction" href="@Url.Action("StopLobby", "Home")" onclick="return confirm('Disband the lobby? Both teams will be removed.');">Disband Lobby</a>
+                }
+                @if (isEnemyLeader)
+                {
+                    <a class="lobbyaction" href="@Url.Action("LeaveLobby", "Home")" onclick="return confirm('Leave the lobby with your team?');">Leave Lobby</a>
+                }
+
+                @if (active && inLobby)
+                {
+                    <div class="chatpanel">
+                        <div class="textback">
+                            <vc:Message Lobby="1" LID="@Convert.ToInt32(ViewData["LID"])" TID="0"></vc:Message>
+                        </div>
+                        <p class="chaterror">@ViewData["ChatError"]</p>
+                        <div class="inputs">
+                            <form class="form" method="post" action="@Url.Action("Message", "Home", new { lID = Convert.ToInt32(ViewData["LID"]), Lobby = true })" enctype="multipart/form-data">
+                                <input type="text" name="Content" class="textinp" placeholder="Message the lobby">
+                                <input type="submit" value=">" class="stackup-button">
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @{ TeamBox(host, "Host", "Empty slot"); }
+    </main>
+
+    <script>
+        // Hotbar: inbox board and profile dropdown (same behaviour as the other pages).
+        const inboxBtn = document.querySelector('.inbox');
+        const board = document.querySelector('.box');
+        if (inboxBtn && board) {
+            inboxBtn.addEventListener('click', () => {
+                const show = board.style.opacity != 1;
+                board.style.opacity = show ? '1' : '0';
+                board.style.zIndex = show ? '1000' : '-1';
+            });
+        }
+        const pic = document.querySelector('#Profilepic');
+        if (pic) {
+            pic.addEventListener('click', () => {
+                document.querySelector('.topsec').classList.toggle('clicked');
+                document.querySelector('.popdown').classList.toggle('clicked');
+            });
+        }
+
+        // Chat is always open: start at the newest message.
+        const flow = document.querySelector('.chatpanel .flow');
+        if (flow) flow.scrollTop = flow.scrollHeight;
+    </script>
+</body>

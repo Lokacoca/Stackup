@@ -1,389 +1,122 @@
-﻿
 <head>
+    <link rel="stylesheet" href="~/css/decor.css" />
+    <link rel="stylesheet" href="~/css/stackup.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        overflow-x: hidden;
-        overflow-y: hidden;
+        body {
+        min-height: 100vh;
+        background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
         }
 
-        #grid {
-        height: 100vh;
-        width: 100vw;
-        display: grid;
-        grid-template-columns: repeat(20, 5vw);
-        grid-template-rows: repeat(20, 5vh);
-        }
-
-        .hotbar {
-        grid-row: 1/3;
-        grid-column: 1/21;
-        background-color: #16171d;
-        z-index: 1000;
-        box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
-        }
-
-        #hotbaritems {
-        grid-row: 1/3;
-        z-index: 100000;
+        .page {
+        position: relative;
+        padding: 60px 2vw 40px;
         display: flex;
-        justify-content: flex-start;
+        flex-direction: column;
         align-items: center;
-        width: 50vw;
-        margin-left: 3vw;
-        height: 10vh;
-        font-size: 1vw;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bolder;
-        color: white;
-        cursor: pointer;
-        }
-
-        #hotbaritems > * {
-        max-height: 100%;
-        max-width: 100%;
+        gap: 20px;
         overflow: hidden;
+        min-height: calc(100vh - 100px);
         }
 
-        #hotbarlogs {
-        margin-top: -100vh;
-        margin-left: 47vw;
-        z-index: 1000001;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        width: 50vw;
-        height: 10vh;
-        font-size: 1vw;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bolder;
-        color: white;
-        }
-
-        #logo {
-        opacity: 0.8;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        #logo:hover {
-        opacity: 1;
-        transform: scale(1.05);
-        }
-
-        .logotitle {
-        transition: transform 0.2s ease;
-        }
-
-        #logo:hover + .logotitle {
-        transform: translateX(0.5vw);
-        }
-
-        .aa {
-        color: rgb(47, 144, 255);
-        }
-
-        .hotbarbuttons {
-        margin-left: 1.5vw;
-        opacity: 0.7;
-        font-size: 0.8vw;
-        transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
-        cursor: pointer;
-        }
-
-        .hotbarbuttons:hover {
-        opacity: 1;
-        transform: scale(1.05);
-        color: rgb(47, 144, 255);
-        }
-
-        #Profilepic {
-        border-radius: 50%;
-        background-color: #1c1e25;
-        justify-self: center;
-        }
-
-        .topsec {
-        grid-column: 18/21;
-        grid-row: 3/6;
-        background-color: #16171d;
-        z-index: 999;
-        transform: translateY(-35vh);
-        transition: transform 0.5s ease-out;
+        .agent2, .agent21 {
+        position: absolute;
+        top: 6%;
+        height: 860px;
+        opacity: 0.4;
+        z-index: -1;
+        user-select: none;
         pointer-events: none;
+        animation: moveToZero 1.5s ease-in-out;
         }
 
-        .topsec.clicked {
-        transform: translateY(0);
-        pointer-events: auto;
+        .agent2 { left: 10vw; }
+        .agent21 { right: 10vw; }
+
+        @@keyframes moveToZero {
+        0% { transform: translateY(50vw); }
+        100% { transform: translateY(0); }
         }
 
-        .topsecfirst {
+        .centerback {
+        width: 100%;
+        max-width: 576px;
+        min-height: 162px;
+        padding: 20px;
+        background-color: #1c1d25;
+        border-radius: 19px;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 0.1vw;
-        margin-left: 1vw;
-        margin-top: 1vh;
-        }
-
-        .topsecsecond {
-        height: 4vh;
-        width: 13vw;
-        background-color: #1c1e25;
-        color: white;
-        display: flex;
-        align-items: center;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bold;
-        justify-self: center;
-        margin-top: 3vh;
-        gap: 1vw;
-        }
-
-        .popdown {
-        grid-column: 18/21;
-        grid-row: 6/10;
-        background-color: #16171d;
-        z-index: 999;
-        display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         justify-content: center;
-        gap: 1vh;
-        border-top: solid rgb(61, 61, 61) 2px;
-        transform: translateY(-35vh);
-        transition: transform 0.5s ease-out;
-        pointer-events: none;
+        gap: 8px;
         }
 
-        .popdown.clicked {
-        transform: translateY(0);
-        pointer-events: auto;
+        #as {
+        text-align: center;
         }
-
-        .popdownbuttons {
-        color: white;
-        width: 15vw;
-        height: 4vh;
-        border-radius: 0.5vw;
-        display: flex;
-        align-items: center;
-        text-indent: 1vw;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bold;
-        font-size: 0.7vw;
-        opacity: 0.8;
-        transition: opacity 0.2s ease, color 0.2s ease;
-        cursor: pointer;
-        text-decoration: none;
-        }
-
-        .popdownbuttons:hover {
-        color: rgb(47, 144, 255);
-        background-color: #1c1e25;
-        opacity: 1;
-        }
-
-        a {
-        text-decoration: none;
-        color: white;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bold;
-        }
-
-        p {
-        text-decoration: none;
-        color: white;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: bold;
-        }
-
-        .popdownicon {
-        height: 1.5vw;
-        width: 1.5vw;
-        margin-left: 0.5vw;
-        }
-
-        .hotprof {
-        transition: transform 0.2s ease;
-        cursor: pointer;
-        }
-
-        .hotprof:hover {
-        transform: scale(1.05);
-        border: solid 2px rgb(15, 19, 22);
-        }
-
-        .list1 {
-        grid-row: 11/21;
-        grid-column: 1/10;
-        background-color: #1c1d25;
-        border-radius: 1vw;
-        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .list {
-        grid-row: 11/21;
-        grid-column: 12/21;
-        background-color: #1c1d25;
-        border-radius: 1vw;
-        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-
 
         .create {
-        grid-row: 8/10;
-        grid-column: 10/12;
+        padding: 14px 22px;
         background-color: rgb(67, 161, 43);
-        color: white;
-        border-radius: 1vw;
-        width: 5vw;
-        height: 5vh;
-        z-index: 10001;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        justify-self: center;
-        align-self: center;
-        font-family: 'Orbitron', sans-serif;
+        border-radius: 19px;
         font-weight: 800;
-        font-size: 0.5vw;
-        transition: transform 0.2s ease, background-color 0.2s ease, font-weight 0.2s ease;
-        text-decoration: none;
+        font-size: 13px;
+        transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .create:hover {
         background-color: rgb(42, 124, 25);
         color: black;
-        font-weight: bolder;
         transform: scale(1.05);
         }
 
-        .back {
-        grid-row: 3/21;
-        grid-column: 1/21;
-        z-index: -100000;
-        background: linear-gradient(to bottom right, #5a5e67 5%, #404451 20%, #1b1c24 100%);
+        .green, .red {
+        font-size: 19px;
+        font-weight: bolder;
+        text-align: center;
         }
 
-        .centerback{
-        grid-column:8/14;
-        grid-row: 5/8;
-        background-color: #1c1d25;
-        border-radius: 1vw;
-        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
-        display:flex;
+        .green { color: green; }
+        .red { color: red; }
+        .green:empty, .red:empty { display: none; }
+
+        /* Fixed-height top area so the match columns always start at the same spot */
+        .topstack {
+        width: 100%;
+        height: 26vh;
+        min-height: 260px;
+        display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
+        gap: 20px;
         }
 
+        .columns {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3vw;
+        }
 
-        .ongoing {
-        grid-column: 12/16;
-        grid-row: 10;
-        color:white;
-        font-size: 1vw;
-        margin-top: 2vh;
+        .column {
+        flex: 1 1 420px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        }
+
+        .column > p {
+        font-size: 19px;
         margin-left: 2vw;
         }
 
-        .searching {
-        grid-column: 1/5;
-        grid-row: 10;
-        color: white;
-        font-size: 1vw;
-        margin-top: 2vh;
-        margin-left: 2vw;
-        }
-
-        #as{
-            margin-left:12.5vw;
-        }
-
-
-        .agent2 {
-        grid-column: 1/10;
-        grid-row: 3/21;
-        opacity: 0.4;
-        display: flex;
-        justify-self: center;
-        z-index: -10;
-        animation: moveToZero 1.5s ease-in-out;
-        user-select: none;
-        }
-
-        .agent21 {
-        grid-column: 12/21;
-        grid-row: 3/21;
-        opacity: 0.4;
-        display: flex;
-        justify-self: center;
-        z-index: -10;
-        animation: moveToZero 1.5s ease-in-out;
-        user-select: none;
-        }
-
-
-        @@keyframes moveToZero {
-        0% {
-        transform: translateY(50vw);
-        }
-
-        100% {
-        transform: translateY(0);
-        }
-        }
-
-
-        .green{
-            grid-column: 8/14;
-            grid-row: 9/11;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1vw;
-            font-weight: bolder;
-            color: green;
-            text-align:center;
-        }
-
-        .red {
-            grid-column: 8/14;
-            grid-row: 9/11;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1vw;
-            font-weight: bolder;
-            color: red;
-            text-align:center;
-
-        }
-        .tag{
-            opacity: 0.6;
-            font-size: 0.9rem
-        }
-
-         .Ninja{
-        all: unset;
-        font-family: 'Orbitron', sans-serif;
-        }
-        .box{
-        grid-area: 3/18/10/21;
-        z-index: 0;
-        opacity: 0;
-        margin-left: -2vw;
-
-        }
-        .inbox{
-        all: unset;
-        font-family: 'Orbitron', sans-serif;
-        cursor:pointer;
-        opacity: 0.7;
-        font-size: 0.8vw;
-        padding-right: 2vw;
+        .list, .list1 {
+        min-height: 540px;
+        padding-bottom: 16px;
+        background-color: #1c1d25;
+        border-radius: 19px;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 
@@ -403,146 +136,127 @@
     }
 }
 
-<body>
-    <div id="grid">
-
-        <div class="hotbar">
-            <div id="hotbaritems">
-                <a href="@Url.Action("Index", "Home" )" id="logo">
-                    <img src="~/Bilder/stackuplogo.png" href="@Url.Action("Index", "Home" )" width="75" height="75" id="logo">
-                </a>
-                <div class="logotitle">Stack | <span class="aa">Up</span></div>
-
-
-                <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
-                @if (Context.Session.GetString("_InloggStatus") == "yes")
-                {
-                    <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="1"></vc:check>
-
-                }
-            </div>
-
+<body class="decor">
+    <div class="hotbar">
+        <div id="hotbaritems">
+            <a href="@Url.Action("Index", "Home" )" id="logo">
+                <img src="~/Bilder/stackuplogo.png" width="75" height="75">
+            </a>
+            <div class="logotitle">Stack | <span class="aa">Up</span></div>
+            <a class="hotbarbuttons" href="@Url.Action("Lobbies", "Home")">Matchmaking</a>
+            @if (Context.Session.GetString("_InloggStatus") == "yes")
+            {
+                <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="1"></vc:check>
+            }
         </div>
+
         <div id="hotbarlogs">
             @if (Context.Session.GetString("_InloggStatus") != "yes")
             {
                 <a class="hotbarbuttons" href="@Url.Action("Create", "Home")">Sign Up</a>
                 <a href="@Url.Action("LogIn", "Home")" class="hotbarbuttons">Log in</a>
             }
-            else if (Context.Session.GetString("_InloggStatus") == "yes")
+            else
             {
-                    <button class="hotbarbuttons inbox">Inbox</button>
-
+                <button class="hotbarbuttons inbox">Inbox</button>
                 <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="60" height="60" id="Profilepic" class="hotprof">
             }
         </div>
-        @if (Context.Session.GetString("_InloggStatus") == "yes")
-        {
-              <div class="box"><vc:requests></vc:requests></div>
+    </div>
 
+    @if (Context.Session.GetString("_InloggStatus") == "yes")
+    {
+        <div class="box"><vc:requests></vc:requests></div>
 
-            <div class="topsec">
-                <div class="topsecfirst">
-                    <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
-                                        <p class="marg">@Model.Rows[0]["Username"]<span class="tag">@Model.Rows[0]["tagline"]</span></p>
-
-                </div>
-                <div class="topsecsecond">
-                    <img src="~/Bilder/Elo.png" alt="" class="popdownicon">
-                    <div>@Model.Rows[0]["rank"]</div>
-                </div>
+        <div class="topsec">
+            <div class="topsecfirst">
+                <img src="~/Bilder/@Model.Rows[0]["Picture"]" width="50" height="50" id="Profilepic">
+                <p>@Model.Rows[0]["Username"]<span class="tag">@Model.Rows[0]["tagline"]</span></p>
             </div>
+            <div class="topsecsecond">
+                <img src="~/Bilder/Elo.png" alt="" class="popdownicon">
+                <div>@Model.Rows[0]["rank"]</div>
+            </div>
+        </div>
 
-
-            <div class="popdown">
-
+        <div class="popdown">
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("LogOut", "Home")">LogOut</a>
+            </div>
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
+                <a href="Settings">Settings</a>
+            </div>
+            @if(Convert.ToInt32(Model.Rows[0]["TID"]) == 0)
+            {
                 <div class="popdownbuttons">
                     <img src="~/Bilder/Team.png" alt="" class="popdownicon">
-                    <a href="@Url.Action("LogOut", "Home")">LogOut</a>
-
+                    <form method="post" action="@Url.Action("Search","Home")">
+                        <input name="input" type="hidden" value="" />
+                        <input class="Ninja" type="submit" value="Join Team"/>
+                    </form>
                 </div>
-
-                <div class="popdownbuttons">
-                    <img src="~/Bilder/Settings.png" alt="" class="popdownicon">
-                    <a href="Settings">Settings</a>
-                </div>
-
-
-                  @if(Convert.ToInt32(Model.Rows[0]["TID"]) == 0)
-                {
-                    <div class="popdownbuttons">
-                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
-                        <form class="Sigma" method="post" action="@Url.Action("Search","Home")">
-                            <input class="Search" name="input" type="hidden"  value="" />
-                            <input class="Ninja" type="submit" value="Join Team"/>
-                        </form>
-
-                    </div>
-                    <div class="popdownbuttons">
-                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
-                        <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
-
-                    </div>
-                
-                }
-                else
-                {
-                    <div class="popdownbuttons">
-                        <img src="~/Bilder/Team.png" alt="" class="popdownicon">
-                        <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
-
-                    </div>
-                }
-
                 <div class="popdownbuttons">
                     <img src="~/Bilder/Team.png" alt="" class="popdownicon">
-                    <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">Profile</a>
+                    <a href="@Url.Action("CreateTeam", "Home")">Create Team</a>
                 </div>
-
+            }
+            else
+            {
+                <div class="popdownbuttons">
+                    <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                    <a href="@Url.Action("ViewTeam", "Home", new{ TID = Context.Session.GetInt32("TID")})">View Team</a>
+                </div>
+            }
+            <div class="popdownbuttons">
+                <img src="~/Bilder/Team.png" alt="" class="popdownicon">
+                <a href="@Url.Action("Profile", "Home", new{ UID = Context.Session.GetInt32("UID")})">Profile</a>
             </div>
-        }
-
-        @*    skriv allt under
- *@
-        @if (Convert.ToInt32(ViewData["Check"]) == 1)
-        {
-            <a  class="create" href="@Url.Action("CreateLobby", "Home")">Create Lobby</a>
-            <p class="green">@ViewData["WIN"]</p>
-            <p class="red">@ViewData["LOOSE"]</p>
-
-        }
-        <p class="green">@ViewData["JOIN"]</p>
-        <p class="red">@ViewData["FAIL"]</p>
-        <p class="red">@ViewData["member"]</p>
-
-
-        <div class="list1">
-            <vc:lobby-list></vc:lobby-list>
         </div>
-        <div class="list">
-            <vc:active></vc:active>
-        </div>
+    }
+
+    <main class="page">
+        <img src="~/Bilder/@($"{mid2}.png")" alt="" class="agent2">
+        <img src="~/Bilder/@($"{mid}.png")" alt="" class="agent21">
+
+        <div class="topstack">
         @if (Context.Session.GetInt32("UID") != null)
         {
             <div class="centerback">
                 <p id="as">Current Lobby</p>
-            <div class="CHECK">
-                <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="0"></vc:check>
-
-            </div>
+                <div class="CHECK">
+                    <vc:check uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))" ben="0"></vc:check>
+                </div>
             </div>
         }
 
-        <div class="back"></div>
+        @if (Convert.ToInt32(ViewData["Check"]) == 1)
+        {
+            <a class="create" href="@Url.Action("CreateLobby", "Home")">Create Lobby</a>
+            <p class="green">@ViewData["WIN"]</p>
+            <p class="red">@ViewData["LOOSE"]</p>
+        }
+        <p class="green">@ViewData["JOIN"]</p>
+        <p class="red">@ViewData["FAIL"]</p>
+        <p class="red">@ViewData["member"]</p>
+        </div>
 
-        <img src="~/Bilder/@($"{mid2}.png")" alt="" class="agent2">
-        <img src="~/Bilder/@($"{mid}.png")" alt="" class="agent21">
-
-
-        <p class="ongoing">Ongoing Matches</p>
-        <p class="searching">Searching For Matches</p>
-
-    </div>
+        <div class="columns">
+            <div class="column">
+                <p class="searching">Searching For Matches</p>
+                <div class="list1">
+                    <vc:lobby-list></vc:lobby-list>
+                </div>
+            </div>
+            <div class="column">
+                <p class="ongoing">Ongoing Matches</p>
+                <div class="list">
+                    <vc:active></vc:active>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
 

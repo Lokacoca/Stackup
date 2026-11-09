@@ -53,6 +53,19 @@ namespace Stackup.Controllers
                 ViewData["Bomba"] = " Accept Was Unsuccesful, That Team Is Currently Full!";
 
             }
+            using (SqlConnection connection = new SqlConnection(GetConnectionString("StackUp.mdf")))
+            {
+                connection.Open();
+                SqlCommand statsCmd = new SqlCommand("SELECT (SELECT COUNT(*) FROM LobbyTable), (SELECT COUNT(*) FROM UserTable), (SELECT COUNT(*) FROM TeamTable)", connection);
+                using (SqlDataReader stats = statsCmd.ExecuteReader())
+                {
+                    stats.Read();
+                    ViewData["Lobbies"] = stats.GetInt32(0);
+                    ViewData["Users"] = stats.GetInt32(1);
+                    ViewData["Hours"] = (int)Math.Round(stats.GetInt32(0) * 1.45);
+                    ViewData["Teams"] = stats.GetInt32(2);
+                }
+            }
             if (HttpContext.Session.GetString("_InloggStatus") == "yes")
             {
                 DataTable nisse = new DataTable();
@@ -194,7 +207,7 @@ namespace Stackup.Controllers
 
                     if (file == null)
                     {
-                        sql.Parameters.AddWithValue("@img", "dummy.png");
+                        sql.Parameters.AddWithValue("@img", "Profile.png");
                         sql.ExecuteNonQuery();
                         DataTable Table = new DataTable();
                         string query2 = ("SELECT * FROM UserTable WHERE Username = @Name AND tagline = @tagline");
@@ -464,6 +477,11 @@ namespace Stackup.Controllers
             {
                 ViewData["REP"] = 1;
 
+            }
+            if (Check == 11)
+            {
+                ViewData["REP"] = 1;
+                ViewData["ChatError"] = "You cannot send an empty message.";
             }
             ViewData["LID"] = Beta.Rows[0]["LID"];
             return View(Data);
@@ -962,7 +980,7 @@ namespace Stackup.Controllers
             using (SqlConnection sqlConn = new SqlConnection(GetConnectionString("StackUp.mdf")))
             {
 
-                string query3 = "SELECT * FROM UserTable u INNER JOIN TeamTable t ON u.TID = t.TID WHERE TID = @TID ";
+                string query3 = "SELECT * FROM UserTable u INNER JOIN TeamTable t ON u.TID = t.TID WHERE u.TID = @TID ";
                 SqlDataAdapter sqlDa1 = new SqlDataAdapter(query3, sqlConn);
                 sqlDa1.SelectCommand.Parameters.AddWithValue("@TID", tid);
                 sqlDa1.Fill(Check1);
@@ -1400,99 +1418,72 @@ namespace Stackup.Controllers
 
 
 
-        public ActionResult Lobby(int LID, string Active)
+        // Loads one side of a lobby: team members with the captain first. table = LobbyTable or HistoryTable.
+        private DataTable LoadLobbyTeam(SqlConnection sqlCon, string table, string idColumn, string teamColumn, int id)
         {
-            DataTable Ben = new DataTable();
-            DataTable Leader1 = new DataTable();
-            DataTable Leader2 = new DataTable();
+            DataTable team = new DataTable();
+            string query = $"SELECT u.UID, u.UserName, u.tagline, u.Picture, u.rank, t.Name AS TeamName, t.Picture AS TeamPicture, " +
+                           $"CASE WHEN u.UID = t.LID THEN 1 ELSE 0 END AS IsLeader " +
+                           $"FROM {table} l INNER JOIN TeamTable t ON t.TID = l.{teamColumn} INNER JOIN UserTable u ON u.TID = t.TID " +
+                           $"WHERE l.{idColumn} = @ID ORDER BY IsLeader DESC, u.UserName";
+            SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@ID", id);
+            sqlDa.Fill(team);
+            return team;
+        }
 
+        private static int LeaderOf(DataTable team)
+        {
+            foreach (DataRow row in team.Rows)
+            {
+                if (Convert.ToInt32(row["IsLeader"]) == 1) return Convert.ToInt32(row["UID"]);
+            }
+            return -1;
+        }
+
+        private ActionResult LobbyView(string table, string idColumn, int LID, string Active, bool history, int? Chat, int? Check)
+        {
             using (SqlConnection sqlCon = new SqlConnection(GetConnectionString("StackUp.mdf")))
             {
                 sqlCon.Open();
-                string query1 = "SELECT * FROM UserTable u INNER JOIN LobbyTable l ON u.TID = l.TeamCreate WHERE l.LID = @LID";
-                SqlDataAdapter sqlDa = new SqlDataAdapter(query1, sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                sqlDa.Fill(Ben);
-                if(Active == "YES")
-                {
-                    string query2 = "SELECT * FROM UserTable u INNER JOIN LobbyTable l ON u.TID = l.TeamJoin WHERE l.LID = @LID";
-                    SqlDataAdapter sqlDa1 = new SqlDataAdapter(query2, sqlCon);
-                    sqlDa1.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                    sqlDa1.Fill(Ben);
-                    ViewData["Active"] = 0;
-                    string query3 = "SELECT t.LID AS Leader FROM TeamTable t INNER JOIN LobbyTable l ON t.TID = l.TeamJoin WHERE l.LID = @LID";
-                    SqlDataAdapter sqlDa2 = new SqlDataAdapter(query3, sqlCon);
-                    sqlDa2.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                    sqlDa2.Fill(Leader1);
-                    ViewData["JoinLeader"] = Leader1.Rows[0]["Leader"];
+                DataTable host = LoadLobbyTeam(sqlCon, table, idColumn, "TeamCreate", LID);
+                DataTable enemy = Active == "YES" ? LoadLobbyTeam(sqlCon, table, idColumn, "TeamJoin", LID) : new DataTable();
 
-                }
-                else
-                {
-                    ViewData["Active"] = 1;
- 
-
-                }
-
-
-                string query4 = "SELECT t.LID AS Leader FROM TeamTable t INNER JOIN LobbyTable l ON t.TID = l.TeamCreate WHERE l.LID = @LID";
-                SqlDataAdapter sqlDa3 = new SqlDataAdapter(query4, sqlCon);
-                sqlDa3.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                sqlDa3.Fill(Leader2);
-
-                ViewData["CreateLeader"] = Leader2.Rows[0]["Leader"];
+                // Logged-in user, for the hotbar (inbox, profile picture and dropdown).
+                DataTable me = new DataTable();
+                SqlDataAdapter meDa = new SqlDataAdapter("SELECT * FROM UserTable WHERE UID = @UID", sqlCon);
+                meDa.SelectCommand.Parameters.AddWithValue("@UID", (object?)HttpContext.Session.GetInt32("UID") ?? DBNull.Value);
+                meDa.Fill(me);
+                ViewData["Me"] = me;
+                ViewData["Enemy"] = enemy;
+                ViewData["Active"] = Active == "YES" ? 0 : 1;
+                ViewData["CreateLeader"] = LeaderOf(host);
+                ViewData["JoinLeader"] = enemy.Rows.Count > 0 ? LeaderOf(enemy) : -1;
                 ViewData["LID"] = LID;
-
-                return View(Ben);
+                // Seeded by the lobby id: random per lobby, but stable across reloads (every chat message reloads the page).
+                ViewData["Map"] = "map" + new Random(LID).Next(1, 7) + ".jpg";
+                ViewData["Chat"] = Chat;
+                if (Check == 11)
+                {
+                    ViewData["ChatError"] = "You cannot send an empty message.";
+                }
+                if (history)
+                {
+                    ViewData["NO"] = 1;
+                }
+                return View("Lobby", host);
             }
         }
+
+        public ActionResult Lobby(int LID, string Active, int? Chat, int? Check)
+        {
+            return LobbyView("LobbyTable", "LID", LID, Active, false, Chat, Check);
+        }
+
         public ActionResult Lobby2(int LID, string Active)
         {
-            DataTable Ben = new DataTable();
-            DataTable Leader1 = new DataTable();
-            DataTable Leader2 = new DataTable();
-
-            using (SqlConnection sqlCon = new SqlConnection(GetConnectionString("StackUp.mdf")))
-            {
-                sqlCon.Open();
-                string query1 = "SELECT * FROM UserTable u INNER JOIN HistoryTable l ON u.TID = l.TeamCreate WHERE l.HID = @LID";
-                SqlDataAdapter sqlDa = new SqlDataAdapter(query1, sqlCon);
-                sqlDa.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                sqlDa.Fill(Ben);
-                if (Active == "YES")
-                {
-                    string query2 = "SELECT * FROM UserTable u INNER JOIN HistoryTable l ON u.TID = l.TeamJoin WHERE l.HID = @LID";
-                    SqlDataAdapter sqlDa1 = new SqlDataAdapter(query2, sqlCon);
-                    sqlDa1.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                    sqlDa1.Fill(Ben);
-                    ViewData["Active"] = 0;
-                    string query3 = "SELECT t.LID AS Leader FROM TeamTable t INNER JOIN HistoryTable l ON t.TID = l.TeamJoin WHERE l.HID = @LID";
-                    SqlDataAdapter sqlDa2 = new SqlDataAdapter(query3, sqlCon);
-                    sqlDa2.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                    sqlDa2.Fill(Leader1);
-                    ViewData["JoinLeader"] = Leader1.Rows[0]["Leader"];
-
-                }
-                else
-                {
-                    ViewData["Active"] = 1;
-
-
-                }
-
-
-                string query4 = "SELECT t.LID AS Leader FROM TeamTable t INNER JOIN HistoryTable l ON t.TID = l.TeamCreate WHERE l.HID = @LID";
-                SqlDataAdapter sqlDa3 = new SqlDataAdapter(query4, sqlCon);
-                sqlDa3.SelectCommand.Parameters.AddWithValue("@LID", LID);
-                sqlDa3.Fill(Leader2);
-
-                ViewData["CreateLeader"] = Leader2.Rows[0]["Leader"];
-                ViewData["LID"] = LID;
-                ViewData["NO"] = 1;
-                return View("Lobby",Ben);
-            }
+            return LobbyView("HistoryTable", "HID", LID, Active, true, null, null);
         }
-
         public ActionResult StopLobby()
         {
             DataTable Lobby = new DataTable();
@@ -1583,6 +1574,10 @@ namespace Stackup.Controllers
 
                 if(Lobby == true)
                 {
+                    if (string.IsNullOrWhiteSpace(Request.Form["Content"]))
+                    {
+                        return RedirectToAction("Lobby", new { LID = lID, Active = "YES", Chat = 1, Check = 11 });
+                    }
                     string query = "INSERT INTO MessageTable (Content, LID, UID) VALUES(@Content, @LID, @UID)";
                     SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                     sqlCmd.Parameters.AddWithValue("@LID", lID);
@@ -1591,10 +1586,14 @@ namespace Stackup.Controllers
                     sqlCmd.ExecuteNonQuery();
 
 
-                    return RedirectToAction("Lobby", new { LID = lID, Active = "YES" });
+                    return RedirectToAction("Lobby", new { LID = lID, Active = "YES", Chat = 1 });
                 }
                 else
                 {
+                    if (string.IsNullOrWhiteSpace(Request.Form["Content"]))
+                    {
+                        return RedirectToAction("ViewTeam", new { TID = HttpContext.Session.GetInt32("TID"), Check = 11 });
+                    }
                     string query = "INSERT INTO MessageTable (Content, TID, UID) VALUES(@Content, @TID, @UID)";
                     SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                     sqlCmd.Parameters.AddWithValue("@TID", TID);

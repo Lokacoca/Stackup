@@ -34,13 +34,15 @@
         .request {
         background-color: #272833;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        height: 10vh;
+        min-height: 108px;
+        padding: 10px;
         transition: transform 0.3s, box-shadow 0.3s;
-        width: 13vw;
+        width: 100%;
         user-select: none;
-        display: grid;
-        grid-template-columns: repeat(4,25%);
-        grid-template-rows: repeat(4,25%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
             z-index: 10000;
         }
 
@@ -48,14 +50,13 @@
         background-color: rgb(62, 128, 62);
         text-align: center;
         color: white;
-        height: 3vh;
-        width: 3vw;
+        padding: 6px 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         user-select: none;
         cursor: pointer;
-        font-size: 0.6vw;
+        font-size: 12px;
             z-index: 10000000010;
         }
 
@@ -63,14 +64,13 @@
         background-color: rgb(187, 70, 66);
         text-align: center;
         color: white;
-        height: 3vh;
-        width: 3vw;
+        padding: 6px 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         user-select: none;
         cursor: pointer;
-        font-size: 0.6vw;
+        font-size: 12px;
         z-index: 10000000010;
         }
 
@@ -89,7 +89,7 @@
         grid-column: 1/5;
         display: flex;
         justify-content: center;
-        margin-top: 1vh;
+        margin-top: 4px;
         }
 
 
@@ -97,14 +97,13 @@
         background-color: rgb(33, 99, 175);
         text-align: center;
         color: white;
-        height: 3vh;
-        width: 3vw;
+        padding: 6px 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         user-select: none;
         cursor: pointer;
-        font-size: 0.6vw;
+        font-size: 12px;
             z-index: 10000000010;
         }
 
@@ -149,7 +148,7 @@
             <div class="request">
                 <h1 class="Name">@Model.Rows[i]["Name"]</h1>
                 <div class="flexing">
-                    <a class="accept" href="@Url.Action("CheckRequest", "Home", new{uid = Model.Rows[i]["UID"], tid = Context.Session.GetInt32("TID"), rid = Model.Rows[i]["RID"] })">Accept</a>
+                    <a class="accept" href="@Url.Action("CheckRequest", "Home", new{uid = Model.Rows[i]["UID"], tid = Model.Rows[i]["TID"], rid = Model.Rows[i]["RID"] })">Accept</a>
                     <a class="decline" href="@Url.Action("DeclineRequest", "Home", new{tid = Model.Rows[i]["TID"], rid =  Model.Rows[i]["RID"]})">Decline</a>
                     <a class="Profile12" href="@Url.Action("ViewTeam", "Home", new{TID = Model.Rows[i]["TID"]})">View</a>
                 </div>

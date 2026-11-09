@@ -1,0 +1,343 @@
+/* Shared base + hotbar styles for all StackUp pages. Fonts are fixed px; spacing shrinks with the window. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+}
+
+p {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+}
+
+/* ---------- Hotbar ---------- */
+.hotbar {
+    position: relative;
+    z-index: 1000;
+    height: 100px;
+    padding: 0 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+    background-color: #16171d;
+    box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.8);
+    font-size: 19px;
+    font-weight: bolder;
+}
+
+#hotbaritems, #hotbarlogs {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+    white-space: nowrap;
+}
+
+#logo {
+    display: flex;
+    opacity: 0.8;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.logotitle {
+    margin-left: -0.8vw;
+    transition: transform 0.2s ease;
+}
+
+#logo:hover + .logotitle {
+    transform: translateX(10px);
+}
+
+.aa {
+    color: rgb(47, 144, 255);
+}
+
+.hotbarbuttons {
+    opacity: 0.7;
+    font-size: 15px;
+    transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.hotbarbuttons:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    color: rgb(47, 144, 255);
+}
+
+.inbox {
+    all: unset;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    opacity: 0.7;
+    font-size: 15px;
+}
+
+/* Search */
+.Sigma {
+    position: relative;
+    flex: 0 1 336px;
+    min-width: 160px;
+    margin-left: auto;
+}
+
+#searchInput {
+    width: 100%;
+    height: 54px;
+    padding-left: 44px;
+    color: white;
+    background-color: #22232c;
+    border: none;
+    border-radius: 19px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+
+.searchicon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 22px;
+    width: 22px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ---------- Profile dropdown (logged in) ---------- */
+#Profilepic {
+    border-radius: 50%;
+    background-color: #1c1e25;
+}
+
+.hotprof {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.hotprof:hover {
+    transform: scale(1.05);
+    border: solid 2px rgb(15, 19, 22);
+}
+
+.topsec, .popdown {
+    position: absolute;
+    right: 0;
+    width: 288px;
+    background-color: #16171d;
+    z-index: 999;
+    transform: translateY(-700px);
+    transition: transform 0.6s ease-out;
+}
+
+.topsec {
+    top: 100px;
+    height: 162px;
+    padding: 16px;
+}
+
+.popdown {
+    top: 262px;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    border-top: solid rgb(61, 61, 61) 2px;
+}
+
+.topsec.clicked, .popdown.clicked {
+    transform: translateY(0);
+}
+
+.topsecfirst {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topsecsecond {
+    height: 43px;
+    margin-top: 32px;
+    padding: 0 10px;
+    background-color: #1c1e25;
+    display: flex;
+    align-items: center;
+}
+
+.tag {
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+.popdownbuttons {
+    height: 43px;
+    margin: 0 12px;
+    padding-left: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 13px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.popdownbuttons:hover {
+    background-color: #1c1e25;
+    opacity: 1;
+}
+
+.popdownicon {
+    height: 29px;
+    width: 29px;
+}
+
+.Ninja {
+    all: unset;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.box {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    width: 288px;
+    height: 378px;
+    z-index: 0;
+    opacity: 0;
+}
+
+/* ---------- Match row (LobbyList, Active, History, Check, CheckProfile components) ---------- */
+#lobby, #lobby1 {
+    width: 95%;
+    min-height: 92px;
+    margin: 16px auto 0;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    background-color: #16171d;
+    border-radius: 0.5em;
+    /* Match rows: sibling of the lobby player banners. Inset frame, chamfer ticks in the opposite
+       corners (top-right / bottom-left), notches at the side edges, and wide brackets around the VS. */
+    outline: 1px solid #2f303d;
+    outline-offset: -7px;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='40'%3E%3Cpath d='M14 4H8L2 20L8 36H14M136 4H142L148 20L142 36H136' fill='none' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 1L15 15' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Cpath d='M1 1L15 15' stroke='%232f303d' stroke-width='2'/%3E%3C/svg%3E"),
+        linear-gradient(rgb(33, 99, 175), rgb(33, 99, 175)),
+        linear-gradient(rgb(33, 99, 175), rgb(33, 99, 175));
+    background-size: auto, auto, auto, 4px 18px, 4px 18px;
+    background-repeat: no-repeat;
+    background-position: center, right 7px top 7px, left 7px bottom 7px, left 1px center, right 1px center;
+    color: white;
+    font-weight: bolder;
+    font-family: 'Orbitron', sans-serif;
+    transition: background-color 0.2s ease;
+}
+
+#lobby:hover, #lobby1:hover {
+    background-color: #242530;
+}
+
+#lobby .left2, #lobby1 .left21, #lobby .right2, #lobby1 .right21 {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+#lobby .right2, #lobby1 .right21 {
+    text-align: right;
+}
+
+#lobby .name1, #lobby .name2, #lobby1 .name11, #lobby1 .name21 {
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#lobby .mid, #lobby1 .mid1 {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#lobby .vs, #lobby1 .vs1 {
+    font-size: 31px;
+}
+
+#buttons, #buttons1 {
+    display: flex;
+    gap: 4px;
+}
+
+.pic1, .pic2, .pic11, .pic21 {
+    display: block;
+    height: 60px;
+    width: 60px;
+    background-color: #282935;
+    border-radius: 50%;
+}
+
+.view, .view1, .view2, .view21, .join, .join1 {
+    padding: 3px 9px;
+    border-radius: 10px;
+    background-color: rgb(47, 144, 255);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.join, .join1 {
+    background-color: rgb(75, 196, 45);
+}
+
+.view:hover, .view1:hover, .view2:hover, .view21:hover {
+    background-color: rgb(25, 71, 124);
+    color: black;
+    transform: scale(1.05);
+}
+
+.join:hover, .join1:hover {
+    background-color: rgb(42, 124, 25);
+    color: black;
+    transform: scale(1.05);
+}
+
+.failed, .mm {
+    text-align: center;
+}
+
+.mm {
+    font-size: 1.5rem;
+}

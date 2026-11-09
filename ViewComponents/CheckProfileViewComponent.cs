@@ -78,6 +78,14 @@ namespace Stackup.ViewComponents
                 sqlDa.SelectCommand.Parameters.AddWithValue("@UID", UID);
 
                 sqlDa.Fill(localTbl);
+
+                // Hide "Join" when the viewer leads the team that created this lobby
+                if (localTbl.Rows.Count > 0 && UserTbl.Rows.Count == 1
+                    && Convert.ToInt32(UserTbl.Rows[0]["TID"]) == Convert.ToInt32(localTbl.Rows[0]["TeamCreate"]))
+                {
+                    ViewData["Check"] = 0;
+                }
+
                 if (localTbl.Rows.Count == 0)
                 {
                     string query1 = "SELECT * FROM LobbyTable l INNER JOIN UserTable t ON l.TeamJoin = t.TID WHERE t.UID = @UID AND l.Active = 'YES'";
