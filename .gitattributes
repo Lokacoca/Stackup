@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# GitHub language statistics: leave the page views out so the C# code is counted as the main language
+Views/Home/** linguist-detectable=false
