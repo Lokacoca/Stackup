@@ -50,14 +50,12 @@ The database has eight tables: users, teams, lobbies, match history, messages, t
 
 ## Development
 
-I built the first version of StackUp by hand in high school. In 2026 I came back to the project and, with AI assistance (Claude Code), redesigned the whole interface, added the match lobby view, fixed bugs and documented the database. All new work was done on a separate branch and reviewed before it was merged into `main`.
+I built the first version of StackUp by hand in high school. The goal was to learn database design, user interface, SQL and C# all together in one project. I came back to the project in 2026 and realized that alot of my features where missing, a result of my poor version control :( So i re-implemented what was missing and did alot of testing and bug hunting with the assistance of claude code on a seperate branch. That branch is now merged into this one and the website is fully functional.`main`.
 
 ## Known limitations and next steps
 
 - Passwords are stored in plain text and should be hashed
 - The database has no foreign key constraints, so the relationships between tables are only enforced in the code
-- Some actions should check more strictly that the logged-in user is allowed to perform them, for example that only a team's leader can delete it
-- The player stats table is prepared but not yet used. The plan is to fill it with match stats from tracker.gg
 
 ## Getting started
 
