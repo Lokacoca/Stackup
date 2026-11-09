@@ -311,7 +311,7 @@
 
             <div class="kdhotbar">
                 <div class="ceezar">
-                    <vc:check-profile ben="0" uid="@Convert.ToInt32(Context.Session.GetInt32("UID"))"></vc:check-profile>
+                    <vc:check-profile ben="0" uid="@Convert.ToInt32(ViewData["UID"])"></vc:check-profile>
                 </div>
                 <p class="green">@ViewData["JOIN"]</p>
                 <p class="red">@ViewData["FAIL"]</p>

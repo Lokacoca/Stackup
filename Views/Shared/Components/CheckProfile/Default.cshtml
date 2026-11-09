@@ -84,7 +84,7 @@ else
                     <div class="mid1">
                         <p class="vs1">VS</p>
                         <div id="buttons1">
-                            @if (Convert.ToInt32(ViewData["Check"]) == 1 && Convert.ToInt32(ViewData["UID"]) != Convert.ToInt32(Context.Session.GetInt32("UID")))
+                            @if (Convert.ToInt32(ViewData["Check"]) == 1)
                             {
                                 <a class="view1" href="@Url.Action("Lobby", "Home", new{ LID = Model.Rows[0]["LID"], Active = "NO"})">View</a>
                                 <a class="join" href="@Url.Action("JoinLobby","Home", new{lid = Model.Rows[0]["LID"] , members = ViewData["error"] })">Join</a>

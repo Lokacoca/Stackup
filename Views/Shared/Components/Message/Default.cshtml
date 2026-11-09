@@ -1,173 +1,107 @@
 ﻿<head>
     <style>
-        .Message{
-        color: white;
-        font-weight: Bolder;
-        font-family: 'Orbitron', sans-serif;
-        background-color: #1c1d25;
-        border-radius: 0.5em;
-        padding-left: 0.2vw;
-        margin-top:2vh;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(1, 1fr);
-        }
-
-        .Message1 {
-        color: white;
-        font-weight: Bolder;
-        font-family: 'Orbitron', sans-serif;
-        background-color: #1c1d25;
-        border-radius: 0.5em;
-        padding-left: 0.2vw;
-        margin-top: 2vh;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(1, 1fr);
-        }
-
-        .Message:hover {
-        background-color: #20222b;
-        transition: background-color 0.2s ease;
-        }
-
-        .Message1:hover {
-        background-color: #20222b;
-        transition: background-color 0.2s ease;
-        }
-
-        #content {
-        color: white;
-        font-weight: 300;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 13px;
-        }
-
-        #content1 {
-        color: white;
-        font-weight: 300;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 13px;
-        }
-
-        #tag {
-        color: grey;
-        font-weight: 100;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 12px;
-        opacity: 0.7;
-        }
-
-        #tag1 {
-        color: grey;
-        font-weight: 100;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 12px;
-        opacity: 0.7;
-        }
-
-        .text {
-        grid-column: 2/4;
-        grid-row: 1;
+        /* Chat bubbles, shared by team chat and lobby chat.
+           Class names are prefixed with "cm-" so page styles (e.g. .pic1 in stackup.css) can't leak in. */
+        .chatflow {
+        height: 35vh;
+        padding: 10px 4px;
         display: flex;
-        flex-direction: column-reverse;
-        justify-content: space-evenly;
-        padding-left: 0.5vw;
-        }
-
-        .text1 {
-        grid-column: 1/4;
-        grid-row: 1;
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: space-evenly;
-        padding-right: 10px;
-        }
-
-
-
-        .pic {
-        height: 58px;
-        width: 58px;
-        grid-column: 1;
-        grid-row: 1;
-        border-radius:50%;
-        }
-
-        .pic1 {
-        height: 58px;
-        width: 58px;
-        grid-column: 4;
-        grid-row: 1;
-            border-radius: 50%;
-        }
-
-        .flow{
-        height:35vh;
-        overflow-y: scroll;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+        scrollbar-width: none;
         -ms-overflow-style: none;
-        scrollbar-width: none; 
         }
 
+        .chatflow::-webkit-scrollbar { display: none; }
 
-
-        .flow::-webkit-scrollbar {
-        display: none;
+        .cm-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        max-width: 85%;
+        align-self: flex-start;
         }
 
-        .text p {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        .cm-row.cm-mine {
+        flex-direction: row-reverse;
+        align-self: flex-end;
+        }
+
+        .cm-pic {
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        }
+
+        .cm-body {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        }
+
+        .cm-mine .cm-body { align-items: flex-end; }
+
+        .cm-name {
+        margin: 0;
+        padding: 0 6px;
+        color: #c9cbd6;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+        }
+
+        .cm-tag {
+        color: grey;
+        font-weight: 100;
+        opacity: 0.7;
+        }
+
+        .cm-bubble {
+        margin: 0;
+        padding: 8px 12px;
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 1.4;
+        background-color: #2a2c38;
+        border-radius: 14px 14px 14px 4px;
+        overflow-wrap: anywhere;
         white-space: normal;
         }
 
-        .text1 p {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        text-align: right;
-        }
-        .REP{
-            display: none;
+        .cm-mine .cm-bubble {
+        background-color: #1e4c81;
+        border-radius: 14px 14px 4px 14px;
         }
 
+        .REP { display: none; }
     </style>
-
 </head>
 
-<div class="flow">
-    @* Same look for team and lobby chat: own messages on the right, everyone else on the left. *@
+<div class="flow chatflow">
+    @* Own messages on the right, everyone else on the left. *@
     @for (int i = 0; i < Model.Rows.Count; i++)
     {
-        if (Convert.ToInt32(Model.Rows[i]["UID"]) == Context.Session.GetInt32("UID"))
-        {
-            <div class="Message1">
-                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic1">
-                <div class="text1">
-                    <p id="content1">@Model.Rows[i]["Content"] </p>
-                    <p id="user1">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-                </div>
+        bool mine = Convert.ToInt32(Model.Rows[i]["UID"]) == Context.Session.GetInt32("UID");
+        <div class="cm-row @(mine ? "cm-mine" : "")">
+            <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="cm-pic" alt="">
+            <div class="cm-body">
+                <p class="cm-name">@Model.Rows[i]["UserName"] <span class="cm-tag">@Model.Rows[i]["tagline"]</span></p>
+                <p class="cm-bubble">@Model.Rows[i]["Content"]</p>
             </div>
-        }
-        else
-        {
-            <div class="Message">
-                <img src="~/Bilder/@Model.Rows[i]["Picture"]" class="pic">
-                <div class="text">
-                    <p id="content">@Model.Rows[i]["Content"] </p>
-                    <p id="user">@Model.Rows[i]["UserName"] <span id="tag">@Model.Rows[i]["tagline"]</span></p>
-                </div>
-            </div>
-        }
+        </div>
     }
 
-<p class="REP">@ViewData["REP"]</p>
-
+    <p class="REP">@ViewData["REP"]</p>
 </div>
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-      const flow = document.querySelector('.flow');
-      flow.scrollTop = flow.scrollHeight;
+        document.querySelectorAll('.chatflow').forEach(f => f.scrollTop = f.scrollHeight);
     });
 </script>
