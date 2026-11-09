@@ -50,7 +50,7 @@ The database has eight tables: users, teams, lobbies, match history, messages, t
 
 ## Development
 
-I built the first version of StackUp by hand in high school. The goal was to learn database design, user interface, SQL and C# all together in one project. I came back to the project in 2026 and realized that alot of my features where missing, a result of my poor version control :( So i re-implemented what was missing and did alot of testing and bug hunting with the assistance of claude code on a seperate branch. That branch is now merged into this one and the website is fully functional.`main`.
+I built the first version of StackUp by hand in high school. The goal was to learn database design, user interface, SQL and C# all together in one project. I came back to the project in 2026 and realized that alot of my features where missing, a result of my poor version control :( So i re-implemented what was missing and did alot of testing and bug hunting with the assistance of claude code on a seperate branch. That branch is now merged into this one and the website is fully functional.
 
 ## Known limitations and next steps
 
