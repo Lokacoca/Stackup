@@ -59,6 +59,6 @@ I built the first version of StackUp by hand in high school. The goal was to lea
 
 ## Getting started
 
-1. Clone the repository.
+1. Clone the repository.(DISCLAIMER, the mdf contains dummy accounts, no real data has been shared. Feel free to choose any account to test features)
 2. Open `Stackup.sln` in Visual Studio 2022 with the **ASP.NET and web development** workload installed. SQL Server LocalDB is included.
 3. Press **F5**. The app attaches `StackUp.mdf` from the project folder automatically.
